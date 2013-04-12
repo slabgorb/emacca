@@ -1,0 +1,80 @@
+;; -*- mode: emacs-lisp; coding: emacs-mule; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Wed Jul 21 13:22:17 2010
+;; Desktop file format version 206
+;; Emacs version 23.2.1
+
+;; Global section:
+(setq tabbar-desktop-saved-tabsets '(("*scratch*" "fwk_store.js" "marketing-book-cover.tpl.php" "template.php")))
+(setq extended-command-history '("desktop-save" "desktop-revert" "menu-bar-mode" "eval-buffer" "google-maps" "eval-region" "rgrep" "replace-string" "menu-bar-mode" "fwk-open" "org-export-as-html-to-buffer" "org-export" "org-export-as-html" "eval-buffer" "rgrep" "occur" "replace-string" "rgrep" "replace-string" "rgrep" "indent-according-to-mode" "org-export-as-pdf-and-open" "org-export-as-html-and-open" "org-export-as-pdf-and-open" "replace-string" "org-export-as-pdf-and-open" "rgrep" "ispell-region" "org-export-as-pdf-and-open" "set-fill-column"))
+(setq file-name-history '("~/.ido.last" "~/.emacs.d/" "~/Projects/www/sites/all/themes/flatworld/" "/Users/kavery/Projects/www/sites/all/themes/flatworld/template.php" "~/Projects/www/sites/all/modules/fwk/fwk_store/marketing-book-cover.tpl.php" "~/Library/Preferences/Aquamacs Emacs/Preferences.el" "~/Projects/www/sites/all/modules/fwk/fwk_store/fwk_store.js" "~/.emacs.d/" "~/Projects/www/sites/all/modules/fwk/fwk_store/fwk_store.js" "~/elisp/nxhtml/etc/schema/xhtml-loader.rnc" "~/.ido.last" "~/Projects/www/sites/all/modules/fwk/fwk_store/fwk_store.js" "~/Library/Preferences/Aquamacs Emacs/Preferences.el" "~/elisp/nxhtml/etc/schema/xhtml-loader.rnc" "~/Library/Preferences/Aquamacs Emacs/Preferences.el" "~/elisp/nxhtml/etc/schema/xhtml-loader.rnc" "~/Library/Preferences/Aquamacs Emacs/Preferences.el" "~/elisp/nxhtml/etc/schema/xhtml-loader.rnc" "~/Projects/www/sites/all/modules/fwk/fwk_store/fwk_store.js" "/Users/kavery/Projects/studentstore/app/views/home/_howitworks.html.haml" "/Users/kavery/Projects/studentstore/app/views/home/books.html.haml" "/Users/kavery/Projects/studentstore/public/stylesheets/main.css" "/Users/kavery/Projects/studentstore/public/stylesheets/sass/_books.scss" "~/Projects/www/sites/all/modules/fwk/fwk_store/fwk_store.js" "~/Projects/www/sites/all/themes/flatworld/template.php" "~/Projects/www/sites/all/modules/fwk/fwk_store/marketing-book-cover.tpl.php" "~/Projects/www/sites/all/modules/fwk/fwk_store/fwk_store.js" "~/Projects/www/sites/all/modules/fwk/fwk_store/fwk_store.js" "~/Projects/www/sites/all/modules/fwk/fwk_store/marketing-book-cover.tpl.php" "~/Projects/www/sites/all/modules/fwk/fwk_store/fwk_store.js" "~/Projects/www/sites/all/modules/fwk/fwk_store/marketing-book-cover.tpl.php"))
+(setq grep-history '("grep -nH -e drupal_add_js *.*" "grep -nH -e drupal_add_js" "grep -nH -e marketing-book-cover *.*" "grep -nH -e _init */*.*" "grep -nH -e NECESSARY */*.*" "grep -nH -e NECESSARY *.*" "grep -nH -e NECESSARY */*.*" "grep -nH -e sugar */*.*" "grep -nH -e bookstore */*.*" "grep -nH -e uc_order_statuses */*/*.*" "grep -nH -e uc_order_statuses */*.*" "grep -nH -e unserialize *.*" "grep -nH -e fwk_api_store_products_list *.*" "grep -nH -e fwk_api_store_products_list *" "grep -nH -e fwk_api_store_products_list" "grep -nH -e order_pane */*/*.*" "grep -nH -e " "grep -nH -e order_pane" "grep -nH -e _order_pane_list */*.*" "grep -nH -e _order_pane_list" "grep -nH -e uc_order_admin */*.*" "grep -nH -e uc_order_admin" "grep -nH -e uc_order_admin */*.*" "grep -nH -e queryable_variables_set */*.*" "grep -nH -e queryable_variables_set" "grep -nHr -e fwk_cgx_process_order" "grep -nH -e fwk_cgx_process_order */*.*" "grep -nH -e fwk_cgx_process_order" "grep -nH -e fwk_cgx_ca_action */*.*" "grep -nH -e  _fwk_textbook_get_quiz_canon_chapter */*.*"))
+(setq compile-history nil)
+(setq minibuffer-history '("7 marianna drive, hastings on hudson, NY, 10706" "39" "6950" "1000" "fwk_store.module" "indent" "c-basic-indent" "=" "6900" "702" "705" "6929" "6920" "6916" "28" "6900" "6864" "169" "6000" "scroll" "speedbar" "496" "1556" "1095" "6888" "1095" "hair" "wash" "life" "foo"))
+(setq query-replace-history '("Book by IBSN" "Product" "FWKAbtest" "FWKOmniture" "isbn" "prod" "hash" "assoc-string" "repository " "repo " "FWKOmniture" "FWKMbox" "node/" "node=" "ubercart_order->" "ubercart_order" "$ubercart_order" "$o->" "$order" "$order_data" "$order" "billing" "shipping" "billing" "delivery" "object" "product" "$product" "$data" "(prod"))
+(setq read-expression-history nil)
+(setq regexp-history '("isbn"))
+(setq regexp-search-ring nil)
+(setq search-ring nil)
+(setq shell-command-history '("svn commit" "svn stat" "svn add js" "svn add fwk_abtest" "svn add ." "svn add fwk_abtest.module "))
+(setq tags-file-name nil)
+(setq register-alist nil)
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 206
+  "/Users/kavery/Projects/www/sites/all/themes/flatworld/template.php"
+  "template.php"
+  'nxhtml-mumamo-mode
+  '(abbrev-mode)
+  18537
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (fill-column . 78) (case-fold-search . t)))
+
+(desktop-create-buffer 206
+  "/Users/kavery/Projects/www/sites/all/modules/fwk/fwk_store/marketing-book-cover.tpl.php"
+  "marketing-book-cover.tpl.php"
+  'php-mode
+  '(abbrev-mode)
+  4077
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . utf-8-unix) (fill-column . 78) (case-fold-search . t)))
+
+(desktop-create-buffer 206
+  "/Users/kavery/Projects/www/sites/all/modules/fwk/fwk_store/fwk_store.js"
+  "fwk_store.js"
+  'js-mode
+  nil
+  2151
+  '(nil nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-file-coding-system . undecided-unix) (fill-column . 78) (case-fold-search . t)))
+
+(desktop-create-buffer 206
+  "/Users/kavery/Library/Preferences/Aquamacs Emacs/Preferences.el"
+  "Preferences.el"
+  'emacs-lisp-mode
+  nil
+  17924
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix)))
+
+(desktop-create-buffer 206
+  "/Users/kavery/Library/Application Support/Aquamacs Emacs/scratch buffer"
+  "*scratch*"
+  'text-mode
+  '(auto-fill-mode smart-spacing-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8) (truncate-lines)))
+
