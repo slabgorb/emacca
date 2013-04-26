@@ -1,0 +1,856 @@
+\documentclass[landscape,12pt,a4paper]{article}
+\usepackage{ae}
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[official]{eurosym}
+\usepackage{amssymb}
+\usepackage{pst-all}
+\definecolor{headercolor1}{cmyk}{0, 0.70, 0.70, 0.2} %logored
+\definecolor{headercolor2}{rgb}{0.12, 0.12, 0.6} %sloganblue
+\definecolor{expendednormal}{rgb}{0.26,0.56,0.26} %darkgreen
+\definecolor{expendedhighrisk}{rgb}{0.26,0.26,0.56} %darkblue
+\definecolor{expendedcritical}{rgb}{0.56,0.26,0.26} %darkred
+\definecolor{opennormal}{rgb}{0.86,1,0.86} %lightgreen
+\definecolor{openhighrisk}{rgb}{0.86,0.86,1} %lightblue
+\definecolor{opencritical}{rgb}{1,0.86,0.86} %lightred
+\definecolor{todaycolor}{rgb}{0.65,0,0} %darkred
+\definecolor{yearcolor}{rgb}{0,0,0} %black
+\definecolor{monthcolor}{rgb}{0,0,0} %black
+\definecolor{weekcolor}{rgb}{0,0,0} %black
+\definecolor{daycolor}{rgb}{0,0,0} %black
+\definecolor{holidaycolor}{rgb}{1,0.66,0.66} %lightred
+\definecolor{taskcolor}{rgb}{0.86,0.86,0.86} %grey
+\definecolor{lcmilestone}{rgb}{0,0,0} %black
+\definecolor{fcmilestone}{rgb}{0,0,0} %black
+\definecolor{tasknamesheadercolor}{rgb}{0,0,0} %black
+\usepackage{fancyhdr}
+\special{! TeXDict begin /landplus90{true}store end }
+\setlength{\textwidth}{250mm}
+\setlength{\textheight}{180mm}
+\setlength{\parindent}{0mm}
+\setlength{\footskip}{20mm}
+\setlength{\oddsidemargin}{0mm}
+\setlength{\topmargin}{-30mm}
+\setlength{\parskip}{1.2ex}
+\setlength{\parindent}{0mm}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[C]{
+\makebox[\textwidth][c]{\footnotesize\sf%
+ {\sc Mayday\hspace{\stretch{1}}
+  ---\hspace{1cm}\thepage\hspace{1cm}---
+   \hspace{\stretch{1}}\today}}}
+
+%----------------------------------------
+\begin{document}
+%----------------------------------------
+
+\makebox[\width][c]{\huge \sc \color{headercolor1} }
+\hfill
+\makebox[\width][r]{\footnotesize \sc \color{headercolor2} }\\[10mm]
+
+\begin{pspicture}(0,0)(25,14.6)
+
+%TASKNAMES COLUMN
+\rput[l](0.2,12.2){\color{expendednormal}Sprint1}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,12.6)(25,12.6)
+\rput[l](0.2,11.4){\color{expendednormal}Sprint2}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,11.8)(25,11.8)
+\rput[l](0.4,10.6){\color{expendednormal}-}
+\rput[l](0.6,10.6){\color{expendednormal}EISBN Setup}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,11)(25,11)
+\rput[l](0.4,9.8){\color{expendednormal}-}
+\rput[l](0.6,9.8){\color{expendednormal}EISBN API Bookserver}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,10.2)(25,10.2)
+\rput[l](0.4,9){\color{expendednormal}-}
+\rput[l](0.6,9){\color{expendednormal}EISBN API Drupal}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,9.4)(25,9.4)
+\rput[l](0.4,8.2){\color{expendednormal}-}
+\rput[l](0.6,8.2){\color{expendednormal}ISBN in Bookserver Info}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,8.6)(25,8.6)
+\rput[l](0.4,7.4){\color{expendednormal}-}
+\rput[l](0.6,7.4){\color{expendednormal}Changes to AuthCode Table (orderid, bid)}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,7.8)(25,7.8)
+\rput[l](0.4,6.6){\color{expendednormal}-}
+\rput[l](0.6,6.6){\color{expendednormal}Mass Upload PDF}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,7)(25,7)
+\rput[l](0.4,5.8){\color{expendednormal}-}
+\rput[l](0.6,5.8){\color{expendednormal}CS Admin}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,6.2)(25,6.2)
+\rput[l](0.4,5){\color{expendednormal}-}
+\rput[l](0.6,5){\color{expendednormal}Change SS Auth}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,5.4)(25,5.4)
+\rput[l](0.4,4.2){\color{expendednormal}-}
+\rput[l](0.6,4.2){\color{expendednormal}AAP Product in Drupal}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,4.6)(25,4.6)
+\rput[l](0.4,3.4){\color{expendednormal}-}
+\rput[l](0.6,3.4){\color{expendednormal}AAP PDF Artwork}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,3.8)(25,3.8)
+\rput[l](0.4,2.6){\color{expendednormal}-}
+\rput[l](0.6,2.6){\color{expendednormal}RRD Basic Integration}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,3)(25,3)
+\rput[l](0.4,1.8){\color{expendednormal}-}
+\rput[l](0.6,1.8){\color{expendednormal}EISBN on Catalog}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,2.2)(25,2.2)
+\rput[l](0.4,1){\color{expendednormal}-}
+\rput[l](0.6,1){\color{expendednormal}Bookstore Order Form}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,1.4)(25,1.4)
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,0.6)(25,0.6)
+
+%TASKTYPES COLUMN
+\psline(9.1,13.4)(9.1,0)
+\rput[c](9.6,12.2){~}\\
+\rput[c](9.6,11.4){~}\\
+\rput[c](9.6,10.6){~}\\
+\rput[c](9.6,9.8){~}\\
+\rput[c](9.6,9){~}\\
+\rput[c](9.6,8.2){~}\\
+\rput[c](9.6,7.4){~}\\
+\rput[c](9.6,6.6){~}\\
+\rput[c](9.6,5.8){~}\\
+\rput[c](9.6,5){~}\\
+\rput[c](9.6,4.2){~}\\
+\rput[c](9.6,3.4){~}\\
+\rput[c](9.6,2.6){~}\\
+\rput[c](9.6,1.8){~}\\
+\rput[c](9.6,1){~}\\
+
+%TIMELINE
+
+% YEARS
+
+% Length of all years in mm = 147
+
+% 2012: Length in mm = 147  (1 day = 5.25mm)
+\psframe(10.3,14)(25,14.6)
+\rput[t](17.65,14.45){2012}
+
+% MONTHS
+
+% Length of all months in mm = 147
+
+% 3: Length in mm = 147 Number of days = 28
+\psframe(10.3,13.4)(25,14)
+\rput[t](17.65,13.85){March}
+
+%TASKBARS
+
+%TASK Sprint1: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=expendednormal](10.3,12)(13.67,12.4)
+
+%TASK Sprint2: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=expendednormal](13.43,11.2)(16.13,11.6)
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=opennormal](16.13,11.2)(16.81,11.6)
+
+%TASK EISBN Setup: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=expendednormal](11.99,10.4)(13.43,10.8)
+
+%TASK EISBN API Bookserver: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=expendednormal](14.64,9.6)(14.88,10)
+
+%TASK EISBN API Drupal: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=expendednormal](14.64,8.8)(14.88,9.2)
+
+%TASK ISBN in Bookserver Info: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=expendednormal](13.67,8)(13.92,8.4)
+
+%TASK Changes to AuthCode Table (orderid, bid): 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=expendednormal](13.67,7.2)(13.92,7.6)
+
+%TASK Mass Upload PDF: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=opennormal](16.81,6.4)(17.05,6.8)
+
+%TASK CS Admin: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=expendednormal](13.67,5.6)(13.92,6)
+
+%TASK Change SS Auth: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=expendednormal](13.67,4.8)(13.92,5.2)
+
+%TASK AAP Product in Drupal: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=expendednormal](13.67,4)(13.92,4.4)
+
+%TASK AAP PDF Artwork: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=expendednormal](11.99,3.2)(13.19,3.6)
+
+%TASK RRD Basic Integration: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=expendednormal](13.92,2.4)(14.16,2.8)
+
+%TASK EISBN on Catalog: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=expendednormal](13.67,1.6)(13.92,2)
+
+%TASK Bookstore Order Form: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=expendednormal](13.67,0.8)(13.92,1.2)
+
+% HIGHLIGHT SPECIAL DATES
+
+% Month (3):
+\psline[linecolor=monthcolor,linewidth=0.2mm,linestyle=dashed](10.3,13.4)(10.3,0)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](10.3,13.4)(10.3,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](10.54,13.4)(10.54,13.2)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](10.78,13.4)(10.78,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](10.78,13.35)(11.02,13.35)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](11.02,13.4)(11.02,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](11.02,13.35)(11.26,13.35)
+
+% Week:
+\psline[linecolor=weekcolor,linewidth=0.2mm,linestyle=dotted](11.26,13.4)(11.26,0)
+\rput[tl](11.36,13.1){\scriptsize 10}
+
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](11.26,13.4)(11.26,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](11.5,13.4)(11.5,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](11.75,13.4)(11.75,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](11.99,13.4)(11.99,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](12.23,13.4)(12.23,13.2)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](12.47,13.4)(12.47,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](12.47,13.35)(12.71,13.35)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](12.71,13.4)(12.71,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](12.71,13.35)(12.95,13.35)
+
+% Week:
+\psline[linecolor=weekcolor,linewidth=0.2mm,linestyle=dotted](12.95,13.4)(12.95,0)
+\rput[tl](13.05,13.1){\scriptsize 11}
+
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](12.95,13.4)(12.95,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](13.19,13.4)(13.19,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](13.43,13.4)(13.43,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](13.67,13.4)(13.67,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](13.91,13.4)(13.91,13.2)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](14.16,13.4)(14.16,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](14.16,13.35)(14.4,13.35)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](14.4,13.4)(14.4,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](14.4,13.35)(14.64,13.35)
+
+% Week:
+\psline[linecolor=weekcolor,linewidth=0.2mm,linestyle=dotted](14.64,13.4)(14.64,0)
+\rput[tl](14.74,13.1){\scriptsize 12}
+
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](14.64,13.4)(14.64,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](14.88,13.4)(14.88,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](15.12,13.4)(15.12,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](15.36,13.4)(15.36,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](15.6,13.4)(15.6,13.2)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](15.84,13.4)(15.84,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](15.84,13.35)(16.08,13.35)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](16.08,13.4)(16.08,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](16.08,13.35)(16.32,13.35)
+
+% Week:
+\psline[linecolor=weekcolor,linewidth=0.2mm,linestyle=dotted](16.32,13.4)(16.32,0)
+\rput[tl](16.42,13.1){\scriptsize 13}
+
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](16.32,13.4)(16.32,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](16.57,13.4)(16.57,13.2)
+
+% Today:
+\psline[linecolor=todaycolor,linewidth=0.2mm,linestyle=solid](16.81,13.4)(16.81,0)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](16.81,13.4)(16.81,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](17.05,13.4)(17.05,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](17.29,13.4)(17.29,13.2)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](17.53,13.4)(17.53,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](17.53,13.35)(17.77,13.35)
+
+% Month (4):
+\psline[linecolor=monthcolor,linewidth=0.2mm,linestyle=dashed](17.77,13.4)(17.77,0)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](17.77,13.4)(17.77,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](17.77,13.35)(18.01,13.35)
+
+% Week:
+\psline[linecolor=weekcolor,linewidth=0.2mm,linestyle=dotted](18.01,13.4)(18.01,0)
+\rput[tl](18.11,13.1){\scriptsize 14}
+
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](18.01,13.4)(18.01,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](18.25,13.4)(18.25,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](18.49,13.4)(18.49,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](18.73,13.4)(18.73,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](18.98,13.4)(18.98,13.2)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](19.22,13.4)(19.22,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](19.22,13.35)(19.46,13.35)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](19.46,13.4)(19.46,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](19.46,13.35)(19.7,13.35)
+
+% Week:
+\psline[linecolor=weekcolor,linewidth=0.2mm,linestyle=dotted](19.7,13.4)(19.7,0)
+\rput[tl](19.8,13.1){\scriptsize 15}
+
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](19.7,13.4)(19.7,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](19.94,13.4)(19.94,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](20.18,13.4)(20.18,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](20.42,13.4)(20.42,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](20.66,13.4)(20.66,13.2)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](20.9,13.4)(20.9,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](20.9,13.35)(21.14,13.35)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](21.14,13.4)(21.14,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](21.14,13.35)(21.39,13.35)
+
+% Week:
+\psline[linecolor=weekcolor,linewidth=0.2mm,linestyle=dotted](21.39,13.4)(21.39,0)
+\rput[tl](21.49,13.1){\scriptsize 16}
+
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](21.39,13.4)(21.39,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](21.63,13.4)(21.63,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](21.87,13.4)(21.87,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](22.11,13.4)(22.11,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](22.35,13.4)(22.35,13.2)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](22.59,13.4)(22.59,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](22.59,13.35)(22.83,13.35)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](22.83,13.4)(22.83,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](22.83,13.35)(23.07,13.35)
+
+% Week:
+\psline[linecolor=weekcolor,linewidth=0.2mm,linestyle=dotted](23.07,13.4)(23.07,0)
+\rput[tl](23.17,13.1){\scriptsize 17}
+
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](23.07,13.4)(23.07,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](23.31,13.4)(23.31,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](23.55,13.4)(23.55,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](23.8,13.4)(23.8,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](24.04,13.4)(24.04,13.2)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](24.28,13.4)(24.28,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](24.28,13.35)(24.52,13.35)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](24.52,13.4)(24.52,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](24.52,13.35)(24.76,13.35)
+
+% Week:
+\psline[linecolor=weekcolor,linewidth=0.2mm,linestyle=dotted](24.76,13.4)(24.76,0)
+\rput[tl](24.86,13.1){\scriptsize 18}
+
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](24.76,13.4)(24.76,13.2)
+
+\end{pspicture}
+
+\newpage
+\makebox[\width][c]{\huge \sc \color{headercolor1} }
+\hfill
+\makebox[\width][r]{\footnotesize \sc \color{headercolor2} }\\[10mm]
+
+\begin{pspicture}(0,0)(25,14.6)
+
+%TASKNAMES COLUMN
+\rput[l](0.4,12.2){\color{expendednormal}-}
+\rput[l](0.6,12.2){\color{expendednormal}OrderID set when AuthCode Redeemed}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,12.6)(25,12.6)
+\rput[l](0.4,11.4){\color{expendednormal}-}
+\rput[l](0.6,11.4){\color{expendednormal}RRD DAO Testing}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,11.8)(25,11.8)
+\rput[l](0.4,10.6){\color{expendednormal}-}
+\rput[l](0.6,10.6){\color{expendednormal}Manual Order Admin}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,11)(25,11)
+\rput[l](0.4,9.8){\color{expendednormal}-}
+\rput[l](0.6,9.8){\color{expendednormal}EISBN for Existing Books}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,10.2)(25,10.2)
+\rput[l](0.4,9){\color{expendednormal}-}
+\rput[l](0.6,9){\color{expendednormal}Canon ISBN List to CS}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,9.4)(25,9.4)
+\rput[l](0.4,8.2){\color{expendednormal}-}
+\rput[l](0.6,8.2){\color{expendednormal}Deliver Asset with Access Card}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,8.6)(25,8.6)
+\rput[l](0.2,7.4){\color{expendednormal}Sprint3}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,7.8)(25,7.8)
+\rput[l](0.4,6.6){\color{expendednormal}-}
+\rput[l](0.6,6.6){\color{expendednormal}TypeAhead}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,7)(25,7)
+\rput[l](0.6,5.8){\color{expendedcritical}-}
+\rput[l](0.4,5.8){\color{expendedcritical}-}
+\rput[l](0.8,5.8){\color{expendedcritical}TypeAhead Back End}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,6.2)(25,6.2)
+\rput[l](0.6,5){\color{expendednormal}-}
+\rput[l](0.4,5){\color{expendednormal}-}
+\rput[l](0.8,5){\color{expendednormal}TypeAhead Front End}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,5.4)(25,5.4)
+\rput[l](0.4,4.2){\color{expendednormal}-}
+\rput[l](0.6,4.2){\color{expendednormal}FMC}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,4.6)(25,4.6)
+\rput[l](0.6,3.4){\color{expendednormal}-}
+\rput[l](0.4,3.4){\color{expendednormal}-}
+\rput[l](0.8,3.4){\color{expendednormal}FMC Too Many}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,3.8)(25,3.8)
+\rput[l](0.6,2.6){\color{expendedcritical}-}
+\rput[l](0.4,2.6){\color{expendedcritical}-}
+\rput[l](0.8,2.6){\color{expendedcritical}FMC Search Form}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,3)(25,3)
+\rput[l](0.6,1.8){\color{expendedcritical}-}
+\rput[l](0.4,1.8){\color{expendedcritical}-}
+\rput[l](0.8,1.8){\color{expendedcritical}FMC Back End}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,2.2)(25,2.2)
+\rput[l](0.6,1){\color{expendednormal}-}
+\rput[l](0.4,1){\color{expendednormal}-}
+\rput[l](0.8,1){\color{expendednormal}FMC Not Found}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,1.4)(25,1.4)
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,0.6)(25,0.6)
+
+%TASKTYPES COLUMN
+\psline(9.1,13.4)(9.1,0)
+\rput[c](9.6,12.2){~}\\
+\rput[c](9.6,11.4){~}\\
+\rput[c](9.6,10.6){~}\\
+\rput[c](9.6,9.8){~}\\
+\rput[c](9.6,9){~}\\
+\rput[c](9.6,8.2){~}\\
+\rput[c](9.6,7.4){~}\\
+\rput[c](9.6,6.6){~}\\
+\rput[c](9.6,5.8){C}\\
+\rput[c](9.6,5){~}\\
+\rput[c](9.6,4.2){~}\\
+\rput[c](9.6,3.4){~}\\
+\rput[c](9.6,2.6){C}\\
+\rput[c](9.6,1.8){C}\\
+\rput[c](9.6,1){~}\\
+
+%TIMELINE
+
+% YEARS
+
+% Length of all years in mm = 147
+
+% 2012: Length in mm = 147  (1 day = 5.25mm)
+\psframe(10.3,14)(25,14.6)
+\rput[t](17.65,14.45){2012}
+
+% MONTHS
+
+% Length of all months in mm = 147
+
+% 3: Length in mm = 89.25 Number of days = 17
+\psframe(10.3,13.4)(19.23,14)
+\rput[t](14.76,13.85){March}
+
+% 4: Length in mm = 57.75 Number of days = 11
+\psframe(19.23,13.4)(25,14)
+\rput[t](22.11,13.85){April}
+
+%TASKBARS
+
+%TASK OrderID set when AuthCode Redeemed: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=expendednormal](13.67,12)(13.92,12.4)
+
+%TASK RRD DAO Testing: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=expendednormal](16.32,11.2)(16.71,11.6)
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=opennormal](16.71,11.2)(16.81,11.6)
+
+%TASK Manual Order Admin: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=expendednormal](15.12,10.4)(15.36,10.8)
+
+%TASK EISBN for Existing Books: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=expendednormal](16.32,9.6)(16.52,10)
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=opennormal](16.52,9.6)(16.57,10)
+
+%TASK Canon ISBN List to CS: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=opennormal](13.67,8.8)(13.92,9.2)
+
+%TASK Deliver Asset with Access Card: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=opennormal](13.67,8)(13.92,8.4)
+
+%TASK Sprint3: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=opennormal](16.57,7.2)(19.94,7.6)
+\psdots[linecolor=lcmilestone,fillcolor=expendednormal,dotstyle=diamond,dotscale=3](18.01,6.6)
+\psdots[linecolor=lcmilestone,fillcolor=expendedcritical,dotstyle=diamond,dotscale=3](18.01,5.8)
+\psdots[linecolor=lcmilestone,fillcolor=expendednormal,dotstyle=diamond,dotscale=3](18.01,5)
+\psdots[linecolor=lcmilestone,fillcolor=expendednormal,dotstyle=diamond,dotscale=3](18.01,4.2)
+
+%TASK FMC Too Many: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=opennormal](18.01,3.2)(18.25,3.6)
+
+%TASK FMC Search Form: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=opencritical](18.01,2.4)(18.49,2.8)
+
+%TASK FMC Back End: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=opencritical](18.73,1.6)(20.42,2)
+
+%TASK FMC Not Found: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=opennormal](20.18,0.8)(20.42,1.2)
+
+% HIGHLIGHT SPECIAL DATES
+
+% Month (3):
+\psline[linecolor=monthcolor,linewidth=0.2mm,linestyle=dashed](10.3,13.4)(10.3,0)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](10.3,13.4)(10.3,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](10.54,13.4)(10.54,13.2)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](10.78,13.4)(10.78,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](10.78,13.35)(11.02,13.35)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](11.02,13.4)(11.02,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](11.02,13.35)(11.26,13.35)
+
+% Week:
+\psline[linecolor=weekcolor,linewidth=0.2mm,linestyle=dotted](11.26,13.4)(11.26,0)
+\rput[tl](11.36,13.1){\scriptsize 10}
+
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](11.26,13.4)(11.26,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](11.5,13.4)(11.5,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](11.75,13.4)(11.75,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](11.99,13.4)(11.99,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](12.23,13.4)(12.23,13.2)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](12.47,13.4)(12.47,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](12.47,13.35)(12.71,13.35)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](12.71,13.4)(12.71,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](12.71,13.35)(12.95,13.35)
+
+% Week:
+\psline[linecolor=weekcolor,linewidth=0.2mm,linestyle=dotted](12.95,13.4)(12.95,0)
+\rput[tl](13.05,13.1){\scriptsize 11}
+
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](12.95,13.4)(12.95,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](13.19,13.4)(13.19,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](13.43,13.4)(13.43,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](13.67,13.4)(13.67,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](13.91,13.4)(13.91,13.2)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](14.16,13.4)(14.16,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](14.16,13.35)(14.4,13.35)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](14.4,13.4)(14.4,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](14.4,13.35)(14.64,13.35)
+
+% Week:
+\psline[linecolor=weekcolor,linewidth=0.2mm,linestyle=dotted](14.64,13.4)(14.64,0)
+\rput[tl](14.74,13.1){\scriptsize 12}
+
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](14.64,13.4)(14.64,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](14.88,13.4)(14.88,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](15.12,13.4)(15.12,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](15.36,13.4)(15.36,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](15.6,13.4)(15.6,13.2)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](15.84,13.4)(15.84,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](15.84,13.35)(16.08,13.35)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](16.08,13.4)(16.08,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](16.08,13.35)(16.32,13.35)
+
+% Week:
+\psline[linecolor=weekcolor,linewidth=0.2mm,linestyle=dotted](16.32,13.4)(16.32,0)
+\rput[tl](16.42,13.1){\scriptsize 13}
+
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](16.32,13.4)(16.32,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](16.57,13.4)(16.57,13.2)
+
+% Today:
+\psline[linecolor=todaycolor,linewidth=0.2mm,linestyle=solid](16.81,13.4)(16.81,0)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](16.81,13.4)(16.81,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](17.05,13.4)(17.05,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](17.29,13.4)(17.29,13.2)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](17.53,13.4)(17.53,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](17.53,13.35)(17.77,13.35)
+
+% Month (4):
+\psline[linecolor=monthcolor,linewidth=0.2mm,linestyle=dashed](17.77,13.4)(17.77,0)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](17.77,13.4)(17.77,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](17.77,13.35)(18.01,13.35)
+
+% Week:
+\psline[linecolor=weekcolor,linewidth=0.2mm,linestyle=dotted](18.01,13.4)(18.01,0)
+\rput[tl](18.11,13.1){\scriptsize 14}
+
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](18.01,13.4)(18.01,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](18.25,13.4)(18.25,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](18.49,13.4)(18.49,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](18.73,13.4)(18.73,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](18.98,13.4)(18.98,13.2)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](19.22,13.4)(19.22,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](19.22,13.35)(19.46,13.35)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](19.46,13.4)(19.46,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](19.46,13.35)(19.7,13.35)
+
+% Week:
+\psline[linecolor=weekcolor,linewidth=0.2mm,linestyle=dotted](19.7,13.4)(19.7,0)
+\rput[tl](19.8,13.1){\scriptsize 15}
+
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](19.7,13.4)(19.7,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](19.94,13.4)(19.94,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](20.18,13.4)(20.18,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](20.42,13.4)(20.42,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](20.66,13.4)(20.66,13.2)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](20.9,13.4)(20.9,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](20.9,13.35)(21.14,13.35)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](21.14,13.4)(21.14,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](21.14,13.35)(21.39,13.35)
+
+% Week:
+\psline[linecolor=weekcolor,linewidth=0.2mm,linestyle=dotted](21.39,13.4)(21.39,0)
+\rput[tl](21.49,13.1){\scriptsize 16}
+
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](21.39,13.4)(21.39,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](21.63,13.4)(21.63,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](21.87,13.4)(21.87,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](22.11,13.4)(22.11,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](22.35,13.4)(22.35,13.2)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](22.59,13.4)(22.59,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](22.59,13.35)(22.83,13.35)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](22.83,13.4)(22.83,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](22.83,13.35)(23.07,13.35)
+
+% Week:
+\psline[linecolor=weekcolor,linewidth=0.2mm,linestyle=dotted](23.07,13.4)(23.07,0)
+\rput[tl](23.17,13.1){\scriptsize 17}
+
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](23.07,13.4)(23.07,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](23.31,13.4)(23.31,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](23.55,13.4)(23.55,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](23.8,13.4)(23.8,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](24.04,13.4)(24.04,13.2)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](24.28,13.4)(24.28,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](24.28,13.35)(24.52,13.35)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](24.52,13.4)(24.52,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](24.52,13.35)(24.76,13.35)
+
+% Week:
+\psline[linecolor=weekcolor,linewidth=0.2mm,linestyle=dotted](24.76,13.4)(24.76,0)
+\rput[tl](24.86,13.1){\scriptsize 18}
+
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](24.76,13.4)(24.76,13.2)
+
+\end{pspicture}
+
+\newpage
+\makebox[\width][c]{\huge \sc \color{headercolor1} }
+\hfill
+\makebox[\width][r]{\footnotesize \sc \color{headercolor2} }\\[10mm]
+
+\begin{pspicture}(0,0)(25,14.6)
+
+%TASKNAMES COLUMN
+\rput[l](0.4,12.2){\color{expendednormal}-}
+\rput[l](0.6,12.2){\color{expendednormal}AAP}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,12.6)(25,12.6)
+\rput[l](0.6,11.4){\color{expendedcritical}-}
+\rput[l](0.4,11.4){\color{expendedcritical}-}
+\rput[l](0.8,11.4){\color{expendedcritical}AAP Front End}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,11.8)(25,11.8)
+\rput[l](0.6,10.6){\color{expendednormal}-}
+\rput[l](0.4,10.6){\color{expendednormal}-}
+\rput[l](0.8,10.6){\color{expendednormal}AAP Remediation}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,11)(25,11)
+\rput[l](0.6,9.8){\color{expendedcritical}-}
+\rput[l](0.4,9.8){\color{expendedcritical}-}
+\rput[l](0.8,9.8){\color{expendedcritical}AAP Back End}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,10.2)(25,10.2)
+\rput[l](0.4,9){\color{expendedcritical}-}
+\rput[l](0.6,9){\color{expendedcritical}Layout Integration}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,9.4)(25,9.4)
+\rput[l](0.2,8.2){\color{expendednormal}Release Milestone}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,8.6)(25,8.6)
+\rput[l](0.2,7.4){\color{expendednormal}Sprint4}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,7.8)(25,7.8)
+\rput[l](0.4,6.6){\color{expendednormal}-}
+\rput[l](0.6,6.6){\color{expendednormal}Checkout Flow}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,7)(25,7)
+\rput[l](0.6,5.8){\color{expendednormal}-}
+\rput[l](0.4,5.8){\color{expendednormal}-}
+\rput[l](0.8,5.8){\color{expendednormal}Ecommerce}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,6.2)(25,6.2)
+\rput[l](0.6,5){\color{expendedhighrisk}-}
+\rput[l](0.4,5){\color{expendedhighrisk}-}
+\rput[l](0.8,5){\color{expendedhighrisk}Upsell Flow}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,5.4)(25,5.4)
+\rput[l](0.4,4.2){\color{expendednormal}-}
+\rput[l](0.6,4.2){\color{expendednormal}Styling}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,4.6)(25,4.6)
+\rput[l](0.4,3.4){\color{expendedcritical}-}
+\rput[l](0.6,3.4){\color{expendedcritical}Book/Course Page}
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,3.8)(25,3.8)
+\psline[linecolor=taskcolor,linewidth=0.02mm,linestyle=solid](0,3)(25,3)
+
+%TASKTYPES COLUMN
+\psline(9.1,13.4)(9.1,3)
+\rput[c](9.6,12.2){~}\\
+\rput[c](9.6,11.4){C}\\
+\rput[c](9.6,10.6){~}\\
+\rput[c](9.6,9.8){C}\\
+\rput[c](9.6,9){C}\\
+\rput[c](9.6,8.2){~}\\
+\rput[c](9.6,7.4){~}\\
+\rput[c](9.6,6.6){~}\\
+\rput[c](9.6,5.8){~}\\
+\rput[c](9.6,5){H}\\
+\rput[c](9.6,4.2){~}\\
+\rput[c](9.6,3.4){C}\\
+
+%TIMELINE
+
+% YEARS
+
+% Length of all years in mm = 147
+
+% 2012: Length in mm = 147  (1 day = 4.08mm)
+\psframe(10.3,14)(25,14.6)
+\rput[t](17.65,14.45){2012}
+
+% MONTHS
+
+% Length of all months in mm = 147
+
+% 3: Length in mm = 24.5 Number of days = 6
+\psframe(10.3,13.4)(12.75,14)
+\rput[t](11.52,13.85){March}
+
+% 4: Length in mm = 122.5 Number of days = 30
+\psframe(12.75,13.4)(25,14)
+\rput[t](18.88,13.85){April}
+
+%TASKBARS
+\psdots[linecolor=lcmilestone,fillcolor=expendednormal,dotstyle=diamond,dotscale=3](18.01,12.2)
+
+%TASK AAP Front End: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=opencritical](18.01,11.2)(18.49,11.6)
+\psdots[linecolor=lcmilestone,fillcolor=expendednormal,dotstyle=diamond,dotscale=3](16.81,10.6)
+
+%TASK AAP Back End: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=opencritical](17.29,9.6)(18.25,10)
+
+%TASK Layout Integration: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=expendedcritical](16.32,8.8)(17.05,9.2)
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=opencritical](17.05,8.8)(17.29,9.2)
+\psdots[linecolor=lcmilestone,fillcolor=expendednormal,dotstyle=diamond,dotscale=3](21.38,8.2)
+
+%TASK Sprint4: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=opennormal](19.7,7.2)(25.0,7.6)
+
+%TASK Checkout Flow: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=opennormal](22.35,6.4)(23.8,6.8)
+
+%TASK Ecommerce: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=opennormal](22.35,5.6)(23.31,6)
+
+%TASK Upsell Flow: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=openhighrisk](16.81,4.8)(17.53,5.2)
+
+%TASK Styling: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=opennormal](18.73,4)(20.42,4.4)
+
+%TASK Book/Course Page: 
+\psframe[fillstyle=solid,linewidth=0.05mm,fillcolor=opencritical](20.42,3.2)(20.9,3.6)
+
+% HIGHLIGHT SPECIAL DATES
+
+% Month (3):
+\psline[linecolor=monthcolor,linewidth=0.2mm,linestyle=dashed](10.3,13.4)(10.3,3)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](10.3,13.4)(10.3,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](10.54,13.4)(10.54,13.2)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](10.78,13.4)(10.78,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](10.78,13.35)(11.02,13.35)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](11.02,13.4)(11.02,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](11.02,13.35)(11.26,13.35)
+
+% Week:
+\psline[linecolor=weekcolor,linewidth=0.2mm,linestyle=dotted](11.26,13.4)(11.26,3)
+\rput[tl](11.36,13.1){\scriptsize 10}
+
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](11.26,13.4)(11.26,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](11.5,13.4)(11.5,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](11.75,13.4)(11.75,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](11.99,13.4)(11.99,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](12.23,13.4)(12.23,13.2)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](12.47,13.4)(12.47,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](12.47,13.35)(12.71,13.35)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](12.71,13.4)(12.71,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](12.71,13.35)(12.95,13.35)
+
+% Week:
+\psline[linecolor=weekcolor,linewidth=0.2mm,linestyle=dotted](12.95,13.4)(12.95,3)
+\rput[tl](13.05,13.1){\scriptsize 11}
+
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](12.95,13.4)(12.95,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](13.19,13.4)(13.19,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](13.43,13.4)(13.43,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](13.67,13.4)(13.67,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](13.91,13.4)(13.91,13.2)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](14.16,13.4)(14.16,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](14.16,13.35)(14.4,13.35)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](14.4,13.4)(14.4,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](14.4,13.35)(14.64,13.35)
+
+% Week:
+\psline[linecolor=weekcolor,linewidth=0.2mm,linestyle=dotted](14.64,13.4)(14.64,3)
+\rput[tl](14.74,13.1){\scriptsize 12}
+
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](14.64,13.4)(14.64,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](14.88,13.4)(14.88,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](15.12,13.4)(15.12,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](15.36,13.4)(15.36,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](15.6,13.4)(15.6,13.2)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](15.84,13.4)(15.84,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](15.84,13.35)(16.08,13.35)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](16.08,13.4)(16.08,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](16.08,13.35)(16.32,13.35)
+
+% Week:
+\psline[linecolor=weekcolor,linewidth=0.2mm,linestyle=dotted](16.32,13.4)(16.32,3)
+\rput[tl](16.42,13.1){\scriptsize 13}
+
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](16.32,13.4)(16.32,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](16.57,13.4)(16.57,13.2)
+
+% Today:
+\psline[linecolor=todaycolor,linewidth=0.2mm,linestyle=solid](16.81,13.4)(16.81,3)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](16.81,13.4)(16.81,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](17.05,13.4)(17.05,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](17.29,13.4)(17.29,13.2)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](17.53,13.4)(17.53,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](17.53,13.35)(17.77,13.35)
+
+% Month (4):
+\psline[linecolor=monthcolor,linewidth=0.2mm,linestyle=dashed](17.77,13.4)(17.77,3)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](17.77,13.4)(17.77,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](17.77,13.35)(18.01,13.35)
+
+% Week:
+\psline[linecolor=weekcolor,linewidth=0.2mm,linestyle=dotted](18.01,13.4)(18.01,3)
+\rput[tl](18.11,13.1){\scriptsize 14}
+
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](18.01,13.4)(18.01,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](18.25,13.4)(18.25,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](18.49,13.4)(18.49,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](18.73,13.4)(18.73,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](18.98,13.4)(18.98,13.2)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](19.22,13.4)(19.22,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](19.22,13.35)(19.46,13.35)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](19.46,13.4)(19.46,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](19.46,13.35)(19.7,13.35)
+
+% Week:
+\psline[linecolor=weekcolor,linewidth=0.2mm,linestyle=dotted](19.7,13.4)(19.7,3)
+\rput[tl](19.8,13.1){\scriptsize 15}
+
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](19.7,13.4)(19.7,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](19.94,13.4)(19.94,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](20.18,13.4)(20.18,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](20.42,13.4)(20.42,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](20.66,13.4)(20.66,13.2)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](20.9,13.4)(20.9,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](20.9,13.35)(21.14,13.35)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](21.14,13.4)(21.14,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](21.14,13.35)(21.39,13.35)
+
+% Week:
+\psline[linecolor=weekcolor,linewidth=0.2mm,linestyle=dotted](21.39,13.4)(21.39,3)
+\rput[tl](21.49,13.1){\scriptsize 16}
+
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](21.39,13.4)(21.39,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](21.63,13.4)(21.63,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](21.87,13.4)(21.87,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](22.11,13.4)(22.11,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](22.35,13.4)(22.35,13.2)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](22.59,13.4)(22.59,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](22.59,13.35)(22.83,13.35)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](22.83,13.4)(22.83,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](22.83,13.35)(23.07,13.35)
+
+% Week:
+\psline[linecolor=weekcolor,linewidth=0.2mm,linestyle=dotted](23.07,13.4)(23.07,3)
+\rput[tl](23.17,13.1){\scriptsize 17}
+
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](23.07,13.4)(23.07,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](23.31,13.4)(23.31,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](23.55,13.4)(23.55,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](23.8,13.4)(23.8,13.2)
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](24.04,13.4)(24.04,13.2)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](24.28,13.4)(24.28,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](24.28,13.35)(24.52,13.35)
+\psline[linecolor=holidaycolor,linewidth=0.2mm,linestyle=solid](24.52,13.4)(24.52,13.2)
+\psline[linecolor=holidaycolor,linewidth=1.0mm](24.52,13.35)(24.76,13.35)
+
+% Week:
+\psline[linecolor=weekcolor,linewidth=0.2mm,linestyle=dotted](24.76,13.4)(24.76,3)
+\rput[tl](24.86,13.1){\scriptsize 18}
+
+\psline[linecolor=daycolor,linewidth=0.2mm,linestyle=solid](24.76,13.4)(24.76,13.2)
+
+\end{pspicture}
+\end{document}
