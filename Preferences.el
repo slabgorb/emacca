@@ -3,8 +3,6 @@
 ;; start server for fast startups
 (server-start)
 
-;; add my local elisp folder
-(setq load-path (cons "~/elisp" load-path))
 ;; Add my local configuration folder
 (setq load-path (cons "~/.emacs.d" load-path))
 
@@ -28,7 +26,7 @@
 (require 'buff-menu+)
 
 ;; have some coffee
-(add-to-list 'load-path "~/elisp/coffee-mode")
+(add-to-list 'load-path "~/.emacs.d/coffee-mode")
 (require 'coffee-mode)
 ;; set to two spaces
 (defun coffee-custom ()
@@ -41,7 +39,7 @@
 (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
 (add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
 
-;; (setq load-path (cons "~/elisp/jquery-doc" load-path))
+;; (setq load-path (cons "~/.emacs.d/jquery-doc" load-path))
 ;; (require 'jquery-doc)
 ;; (add-hook 'js2-mode-hook 'jquery-doc-setup)
 
@@ -50,7 +48,7 @@
 (autoload 'csv-mode "csv-mode"
    "Major mode for editing comma-separated value files." t)
 
-;; etask task tracking 
+;; etask task tracking
 (add-to-list 'load-path "~/.emacs.d/etask/")
 (require 'etask)
 
@@ -58,7 +56,7 @@
 
 (setq tex-command "pdftex")
 (setq tex-dvi-view-command "~/bin/latex-view.sh '*'")
-(add-to-list 'load-path "~/elisp/feature-mode")
+(add-to-list 'load-path "~/.emacs.d/feature-mode")
 ;; optional configurations
 ;; default language if .feature doesn't have "# language: fi"
 ;(setq feature-default-language "fi")
@@ -70,17 +68,17 @@
 (add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
 
 
-(setq load-path (cons "~/elisp/magit-0.8.2" load-path))
+(setq load-path (cons "~/.emacs.d/magit-0.8.2" load-path))
 (require 'magit)
 
-(add-to-list 'load-path "~/elisp/mo-git-blame")
+(add-to-list 'load-path "~/.emacs.d/mo-git-blame")
 (autoload 'mo-git-blame-file "mo-git-blame" nil t)
 (autoload 'mo-git-blame-current "mo-git-blame" nil t)
 
 (require 'flymake)
 
 ;; add emacs-rails subfolder
-(setq load-path (cons "~/elisp/emacs-rails" load-path))
+(setq load-path (cons "~/.emacs.d/emacs-rails" load-path))
 (require 'rails)
 (add-hook 'rails-mode-hook
           '(lambda ()
@@ -110,7 +108,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; ;; load nxhtml
-;; (load "~/elisp/nxhtml/autostart.el")
+;; (load "~/.emacs.d/nxhtml/autostart.el")
 ;; (setq
 ;;  nxhtml-global-minor-mode t
 ;;  mumamo-chunk-coloring 'submode-colored
@@ -238,7 +236,7 @@ If the new path's directories does not exist, create them."
 (autoload 'pymacs-apply "pymacs")
 (autoload 'pymacs-call "pymacs")
 
-(add-to-list 'load-path "~/elisp/ruby-end")
+(add-to-list 'load-path "~/.emacs.d/ruby-end")
 (require 'ruby-end)
 
 ;; DATES AND TIMES
@@ -795,20 +793,20 @@ argument is given, you can choose which register to jump to."
 (defun kill-other-buffers ()
     "Kill all other buffers."
     (interactive)
-    (mapc 'kill-buffer 
-          (delq (current-buffer) 
+    (mapc 'kill-buffer
+          (delq (current-buffer)
                 (remove-if-not 'buffer-file-name (buffer-list)))))
 ;; from Sridhar Ratnakumar
 ;; http://stackoverflow.com/questions/3417438/closing-all-other-buffers-in-emacs
 (defun kill-all-buffers ()
     "Kill all other buffers."
     (interactive)
-    (mapc 'kill-buffer 
+    (mapc 'kill-buffer
          (remove-if-not 'buffer-file-name (buffer-list))))
 
 
 (setq default-frame-alist '((left . 0) (width . 141) (height . 44)))
-(add-to-list 'default-frame-alist '(alpha . (100 85))) 
+(add-to-list 'default-frame-alist '(alpha . (100 85)))
 (defun transparency-set-initial-value ()
   "Set initial value of alpha parameter for the current frame"
   (interactive)
@@ -821,7 +819,7 @@ argument is given, you can choose which register to jump to."
   (if (> numb 100)
       (message "Error! The maximum value for transparency is 100!")
     (if (< numb 0)
-	(message "Error! The minimum value for transparency is 0!")
+        (message "Error! The minimum value for transparency is 0!")
       (set-frame-parameter nil 'alpha numb))))
 
 (defun transparency-increase ()
