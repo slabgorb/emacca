@@ -1,0 +1,442 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.16 in css mode. -->
+<html>
+  <head>
+    <title>calendar.el</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #eedfcc;
+        background-color: #537182;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #cccccc;
+      }
+      .comment-delimiter {
+        /* font-lock-comment-delimiter-face */
+        color: #cccccc;
+      }
+      .constant {
+        /* font-lock-constant-face */
+        color: #add8e6;
+      }
+      .doc {
+        /* font-lock-doc-face */
+        color: #cdc0b0;
+      }
+      .function-name {
+        /* font-lock-function-name-face */
+        color: #ffa07a;
+        font-weight: bold;
+      }
+      .keyword {
+        /* font-lock-keyword-face */
+        color: #add8e6;
+        font-weight: bold;
+      }
+      .paren {
+        /* paren-face */
+        color: #cdc0b0;
+      }
+      .string {
+        /* font-lock-string-face */
+        color: #b4eeb4;
+      }
+      .variable-name {
+        /* font-lock-variable-name-face */
+        color: #add8e6;
+        font-weight: bold;
+      }
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="comment-delimiter">;; </span><span class="comment">-*- emacs-lisp -*-
+</span><span class="comment-delimiter">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><span class="comment">
+</span><span class="comment-delimiter">;; </span><span class="comment">$Id: calendar.el,v 1.16 2006/03/06 12:07:06 ole Exp $
+</span><span class="comment-delimiter">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><span class="comment">
+</span><span class="comment-delimiter">;;;</span><span class="comment">_* Calendar related stuff
+</span><span class="comment-delimiter">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><span class="comment">
+</span>
+<span class="paren">(</span><span class="keyword">defconst</span> <span class="variable-name">calendar-etc-dir</span> <span class="paren">(</span>expand-file-name <span class="string">"calendar/"</span> emacs-etc-dir<span class="paren">)</span>
+  <span class="doc">"Directory for calendar related files"</span><span class="paren">)</span>
+
+<span class="comment-delimiter">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><span class="comment">
+</span><span class="comment-delimiter">;;;</span><span class="comment">_* Calendar and Planner Keys
+</span><span class="comment-delimiter">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><span class="comment">
+</span>
+<span class="paren">(</span><span class="keyword">defvar</span> <span class="variable-name">calendar-keymap</span> <span class="paren">(</span>make-sparse-keymap <span class="string">"Appt: (a)dd/(d)elete, (c)alendar, (dD)iary, (n)ote, (p)lan, (t)ask"</span><span class="paren">)</span>
+  <span class="doc">"Keymap used to globally access calendar and planner related functions"</span><span class="paren">)</span>
+<span class="paren">(</span>define-key mode-specific-map [?c] calendar-keymap<span class="paren">)</span>
+<span class="paren">(</span>define-key calendar-keymap [??] 'describe-prefix-bindings<span class="paren">)</span>
+
+<span class="paren">(</span>define-key calendar-keymap [?a] 'appt-add<span class="paren">)</span>    <span class="comment-delimiter">;; </span><span class="comment">add appointment
+</span><span class="paren">(</span>define-key calendar-keymap [?A] 'appt-delete<span class="paren">)</span> <span class="comment-delimiter">;; </span><span class="comment">delete appointment
+</span>
+<span class="paren">(</span>define-key calendar-keymap [?d] 'diary<span class="paren">)</span> <span class="comment-delimiter">;; </span><span class="comment">show fancy diary
+</span><span class="paren">(</span>define-key calendar-keymap [?D] 'show-all-diary-entries<span class="paren">)</span> <span class="comment-delimiter">;; </span><span class="comment">show raw diary
+</span><span class="paren">(</span>define-key calendar-keymap [?c] 'calendar<span class="paren">)</span> <span class="comment-delimiter">;; </span><span class="comment">show calendar
+</span>
+<span class="paren">(</span>define-key calendar-keymap [?p] 'plan<span class="paren">)</span>
+<span class="paren">(</span>define-key calendar-keymap [?t] 'planner-create-task-from-buffer<span class="paren">)</span>
+<span class="paren">(</span>define-key calendar-keymap [?n] 'planner-create-note<span class="paren">)</span>
+
+<span class="paren">(</span>define-key calendar-keymap [?v] 'remember<span class="paren">)</span>
+<span class="paren">(</span>define-key calendar-keymap [?r] 'remember-region<span class="paren">)</span>
+<span class="paren">(</span>define-key calendar-keymap [?b] 'remember-buffer<span class="paren">)</span>
+<span class="paren">(</span>define-key calendar-keymap [?u] 'remember-url<span class="paren">)</span>
+<span class="paren">(</span>define-key calendar-keymap [?l] 'remember-location<span class="paren">)</span>
+
+<span class="paren">(</span>define-key calendar-keymap [?f] 'planner-goto-plan-page<span class="paren">)</span>
+<span class="paren">(</span>define-key calendar-keymap [?w] 'emacs-wiki-find-file<span class="paren">)</span>
+<span class="paren">(</span>define-key calendar-keymap [?j] 'emacs-wiki-journal-add-entry-other-window<span class="paren">)</span>
+
+<span class="paren">(</span>define-key goto-keymap [?p] 'plan<span class="paren">)</span>
+
+<span class="comment-delimiter">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><span class="comment">
+</span><span class="comment-delimiter">;; </span><span class="comment">time display in modeline
+</span><span class="comment-delimiter">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><span class="comment">
+</span><span class="paren">(</span><span class="keyword">require</span> '<span class="constant">time</span><span class="paren">)</span>
+
+<span class="comment-delimiter">;; </span><span class="comment">display time in 24 hr format
+</span><span class="paren">(</span>setq display-time-24hr-format t<span class="paren">)</span>
+
+<span class="comment-delimiter">;; </span><span class="comment">turn on time display in modeline
+</span><span class="paren">(</span>display-time<span class="paren">)</span>
+
+<span class="comment-delimiter">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><span class="comment">
+</span><span class="comment-delimiter">;;;</span><span class="comment">_* Appointments
+</span><span class="comment-delimiter">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><span class="comment">
+</span><span class="paren">(</span><span class="keyword">require</span> '<span class="constant">appt</span><span class="paren">)</span>
+
+<span class="comment-delimiter">;; </span><span class="comment">Turn on warnings.
+</span><span class="paren">(</span>setq appt-issue-message t<span class="paren">)</span>
+
+<span class="comment-delimiter">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><span class="comment">
+</span><span class="comment-delimiter">;; </span><span class="comment">calendar 
+</span><span class="comment-delimiter">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><span class="comment">
+</span><span class="paren">(</span><span class="keyword">require</span> '<span class="constant">calendar</span><span class="paren">)</span>
+
+<span class="comment-delimiter">;; </span><span class="comment">European dates, with the date in front of the month.
+</span><span class="paren">(</span>european-calendar<span class="paren">)</span>
+
+<span class="paren">(</span>setq calendar-week-start-day 1
+      calendar-day-name-array [<span class="string">"Sonntag"</span> <span class="string">"Montag"</span> <span class="string">"Dienstag"</span> <span class="string">"Mittwoch"</span>
+                               <span class="string">"Donnerstag"</span> <span class="string">"Freitag"</span> <span class="string">"Samstag"</span>]
+      calendar-month-name-array [<span class="string">"Januar"</span> <span class="string">"Februar"</span> <span class="string">"M&#228;rz"</span> <span class="string">"April"</span> <span class="string">"Mai"</span>
+                                 <span class="string">"Juni"</span> <span class="string">"Juli"</span> <span class="string">"August"</span> <span class="string">"September"</span>
+                                 <span class="string">"Oktober"</span> <span class="string">"November"</span> <span class="string">"Dezember"</span>]<span class="paren">)</span>
+
+<span class="comment-delimiter">;; </span><span class="comment">Some holidays which are more European than the American defaults.
+</span><span class="paren">(</span>setq general-holidays
+      '<span class="paren">((</span>holiday-fixed 1 1   <span class="string">"Neujahr"</span><span class="paren">)</span>
+        <span class="paren">(</span>holiday-fixed 1 6   <span class="string">"Dreik&#246;nig"</span><span class="paren">)</span>
+        <span class="paren">(</span>holiday-fixed 2 14  <span class="string">"Valentinstag"</span><span class="paren">)</span>
+        <span class="paren">(</span>holiday-fixed 3 17  <span class="string">"St. Patrick's Day"</span><span class="paren">)</span>
+        <span class="paren">(</span>holiday-fixed 4 1   <span class="string">"1. April"</span><span class="paren">)</span>
+        <span class="paren">(</span>holiday-fixed 5 1   <span class="string">"Tag der Arbeit"</span><span class="paren">)</span>
+        <span class="paren">(</span>holiday-fixed 10 3  <span class="string">"Tag der Einheit"</span><span class="paren">)</span>
+        <span class="paren">(</span>holiday-fixed 11 1  <span class="string">"Allerheiligen"</span><span class="paren">)</span>
+        <span class="paren">(</span>holiday-fixed 11 11 <span class="string">"Martinstag"</span><span class="paren">)</span>
+        <span class="paren">(</span>holiday-fixed 12 6  <span class="string">"Nikolaus"</span><span class="paren">)</span>
+        <span class="paren">(</span>holiday-fixed 12 24 <span class="string">"Heiligabend"</span><span class="paren">)</span>
+        <span class="paren">(</span>holiday-fixed 12 26 <span class="string">"2. Weihnachtsfeiertag"</span><span class="paren">)</span>
+        <span class="paren">(</span>holiday-fixed 12 31 <span class="string">"Sylvester"</span><span class="paren">)</span>
+<span class="paren">))</span>
+
+<span class="paren">(</span>setq local-holidays
+      '<span class="paren">((</span>holiday-float 12 0 -1 <span class="string">"4. Advent"</span> 24<span class="paren">)</span>
+        <span class="paren">(</span>holiday-float 12 0 -2 <span class="string">"3. Advent"</span> 24<span class="paren">)</span>
+        <span class="paren">(</span>holiday-float 12 0 -3 <span class="string">"2. Advent"</span> 24<span class="paren">)</span>
+        <span class="paren">(</span>holiday-float 12 0 -4 <span class="string">"1. Advent"</span> 24<span class="paren">)</span>
+<span class="paren">))</span>
+
+
+<span class="paren">(</span>setq calendar-holidays
+      <span class="paren">(</span>append general-holidays local-holidays other-holidays
+          christian-holidays solar-holidays<span class="paren">))</span>
+
+<span class="comment-delimiter">;; </span><span class="comment">set latitude and longitude for Weinheim, Germany
+</span><span class="paren">(</span>setq calendar-location-name <span class="string">"Weinheim"</span>
+      calendar-latitude 49.554940
+      calendar-longitude 8.671590<span class="paren">)</span>
+
+<span class="comment-delimiter">;; </span><span class="comment">Mark holidays and diary entries in calendar.
+</span><span class="paren">(</span>setq mark-holidays-in-calendar t
+      mark-diary-entries-in-calendar t<span class="paren">)</span>
+
+<span class="comment-delimiter">;; </span><span class="comment">Mark current day on calendar.
+</span><span class="paren">(</span>add-hook 'today-visible-calendar-hook 'calendar-mark-today<span class="paren">)</span>
+
+<span class="paren">(</span><span class="keyword">defun</span> <span class="function-name">calendar-goto-iso-week</span> <span class="paren">(</span>week year<span class="paren">)</span>
+  <span class="doc">"Move cursor to ISO week number WEEK of year YEAR.
+Interactively uses the \"current\" year and just asks for a week
+number."</span>
+  <span class="paren">(</span>interactive
+   <span class="paren">(</span><span class="keyword">progn</span> 
+     <span class="paren">(</span><span class="keyword">require</span> '<span class="constant">cal-iso</span><span class="paren">)</span>
+     <span class="paren">(</span><span class="keyword">let*</span> <span class="paren">((</span>year <span class="paren">(</span>extract-calendar-year <span class="paren">(</span>calendar-cursor-to-date t<span class="paren">)))</span>
+            <span class="paren">(</span>no-weeks <span class="paren">(</span>extract-calendar-month
+                       <span class="paren">(</span>calendar-iso-from-absolute
+                        <span class="paren">(</span>1-
+                         <span class="paren">(</span>calendar-dayname-on-or-before
+                          1 <span class="paren">(</span>calendar-absolute-from-gregorian
+                             <span class="paren">(</span>list 1 4 <span class="paren">(</span>1+ year<span class="paren">))))))))</span>
+            <span class="paren">(</span>week <span class="paren">(</span>calendar-read
+                   <span class="paren">(</span>format <span class="string">"ISO calendar week (1-%d): "</span> no-weeks<span class="paren">)</span>
+                   '<span class="paren">(</span><span class="keyword">lambda</span> <span class="paren">(</span>x<span class="paren">)</span> <span class="paren">(</span>and <span class="paren">(</span>&gt; x 0<span class="paren">)</span> <span class="paren">(</span>&lt;= x no-weeks<span class="paren">))))))</span>
+       <span class="paren">(</span>list week year<span class="paren">))))</span>
+  <span class="paren">(</span>calendar-goto-iso-date <span class="paren">(</span>list week calendar-week-start-day year<span class="paren">)))</span>
+
+<span class="paren">(</span>define-key calendar-mode-map <span class="string">"gw"</span> 'calendar-goto-iso-week<span class="paren">)</span>
+
+<span class="comment-delimiter">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><span class="comment">
+</span><span class="comment-delimiter">;; </span><span class="comment">diary
+</span><span class="comment-delimiter">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><span class="comment">
+</span><span class="comment-delimiter">;; </span><span class="comment">(require 'cal-desk-calendar)
+</span>
+<span class="paren">(</span>setq diary-schedule-interval-time 60
+      diary-schedule-expand-grid t
+      diary-default-schedule-start-time 1000
+      diary-default-schedule-stop-time  1800
+      diary-schedule-start-time 1000
+      diary-schedule-stop-time 1800<span class="paren">)</span>
+
+<span class="comment-delimiter">;; </span><span class="comment">(setq diary-display-hook nil)
+</span><span class="comment-delimiter">;; </span><span class="comment">(add-hook 'diary-display-hook 'fancy-schedule-display-desk-calendar t)
+</span><span class="comment-delimiter">;;</span><span class="comment">(add-hook 'diary-display-hook 'sort-diary-entries)
+</span><span class="paren">(</span>add-hook 'diary-display-hook 'fancy-diary-display<span class="paren">)</span>
+
+<span class="comment-delimiter">;; </span><span class="comment">Use a slightly nonstandard diary file.
+</span><span class="paren">(</span>setq diary-file <span class="paren">(</span>expand-file-name <span class="string">"diary"</span> calendar-etc-dir<span class="paren">))</span>
+
+<span class="comment-delimiter">;; </span><span class="comment">This combination should be OK.
+</span><span class="paren">(</span>setq diary-list-include-blanks nil<span class="paren">)</span>
+<span class="paren">(</span>setq number-of-diary-entries 1<span class="paren">)</span>
+
+<span class="comment-delimiter">;; </span><span class="comment">Make sure diary entries are sorted, and includes are processed.
+</span><span class="paren">(</span>add-hook 'list-diary-entries-hook 'include-other-diary-files<span class="paren">)</span>
+<span class="paren">(</span>add-hook 'list-diary-entries-hook 'sort-diary-entries t<span class="paren">)</span>
+<span class="paren">(</span>add-hook 'list-diary-entries-hook 'bbdb-include-anniversaries<span class="paren">)</span>
+
+<span class="paren">(</span>autoload 'bbdb-include-anniversaries <span class="string">"bbdb-anniv"</span>
+  <span class="doc">"Include bbdb anniversaries in diary."</span><span class="paren">)</span>
+
+<span class="comment-delimiter">;; </span><span class="comment">Mark diary entries on calendar.  Allow nested diary files and make
+</span><span class="comment-delimiter">;; </span><span class="comment">sure that entries from all files are marked on the calendar.
+</span><span class="paren">(</span>add-hook 'mark-diary-entries-hook 'mark-included-diary-files<span class="paren">)</span>
+
+<span class="paren">(</span><span class="keyword">defun</span> <span class="function-name">diary-schedule</span> <span class="paren">(</span>m1 d1 y1 m2 d2 y2 dayname<span class="paren">)</span>
+  <span class="doc">"Entry applies if date is between dates on DAYNAME.  
+    Order of the parameters is M1, D1, Y1, M2, D2, Y2 if
+    `</span><span class="doc"><span class="constant">european-calendar-style</span></span><span class="doc">' is nil, and D1, M1, Y1, D2, M2, Y2 if
+    `</span><span class="doc"><span class="constant">european-calendar-style</span></span><span class="doc">' is t. Entry does not apply on a history.
+Example:
+    &amp;%%(diary-schedule 22 4 2003 1 8 2003 2) 18:00 History
+"</span>
+  <span class="paren">(</span><span class="keyword">let</span> <span class="paren">((</span>date1 <span class="paren">(</span>calendar-absolute-from-gregorian
+                <span class="paren">(</span><span class="keyword">if</span> european-calendar-style
+                    <span class="paren">(</span>list d1 m1 y1<span class="paren">)</span>
+                  <span class="paren">(</span>list m1 d1 y1<span class="paren">))))</span>
+        <span class="paren">(</span>date2 <span class="paren">(</span>calendar-absolute-from-gregorian
+                <span class="paren">(</span><span class="keyword">if</span> european-calendar-style
+                    <span class="paren">(</span>list d2 m2 y2<span class="paren">)</span>
+                  <span class="paren">(</span>list m2 d2 y2<span class="paren">))))</span>
+        <span class="paren">(</span>d <span class="paren">(</span>calendar-absolute-from-gregorian date<span class="paren">)))</span>
+    <span class="paren">(</span><span class="keyword">if</span> <span class="paren">(</span>and 
+         <span class="paren">(</span>&lt;= date1 d<span class="paren">)</span> 
+         <span class="paren">(</span>&lt;= d date2<span class="paren">)</span>
+         <span class="paren">(</span>= <span class="paren">(</span>calendar-day-of-week date<span class="paren">)</span> dayname<span class="paren">)</span>
+         <span class="paren">(</span>not <span class="paren">(</span>check-calendar-holidays date<span class="paren">))</span>
+         <span class="paren">)</span>
+        entry<span class="paren">)))</span>
+
+<span class="comment-delimiter">;; </span><span class="comment">How to print the visible diary.
+</span><span class="comment-delimiter">;</span><span class="comment">(setq print-diary-entries-hook 'print-buffer)
+</span>
+<span class="comment-delimiter">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><span class="comment">
+</span><span class="comment-delimiter">;;;</span><span class="comment">_* The Project Planner
+</span><span class="comment-delimiter">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><span class="comment">
+</span>
+
+<span class="comment-delimiter">;; </span><span class="comment">(add-to-list 'load-path (expand-file-name "planner/" emacs-packages-dir))
+</span>
+<span class="paren">(</span><span class="keyword">require</span> '<span class="constant">planner</span><span class="paren">)</span>
+<span class="comment-delimiter">;; </span><span class="comment">(require 'planner-bbdb)
+</span><span class="comment-delimiter">;; </span><span class="comment">(require 'planner-diary)
+</span><span class="comment-delimiter">;; </span><span class="comment">(require 'planner-erc)
+</span><span class="comment-delimiter">;; </span><span class="comment">(require 'planner-gnus)
+</span><span class="comment-delimiter">;; </span><span class="comment">(require 'planner-id)
+</span><span class="comment-delimiter">;; </span><span class="comment">(require 'planner-notes-index)
+</span><span class="comment-delimiter">;; </span><span class="comment">(require 'planner-rss)
+</span><span class="comment-delimiter">;; </span><span class="comment">(require 'planner-cyclic)
+</span><span class="comment-delimiter">;; </span><span class="comment">(require 'planner-lisp)
+</span><span class="comment-delimiter">;; </span><span class="comment">(require 'planner-w3m)
+</span><span class="comment-delimiter">;; </span><span class="comment">(require 'planner-tasks-overview)
+</span><span class="comment-delimiter">;; </span><span class="comment">(require 'planner-experimental)
+</span><span class="comment-delimiter">;; </span><span class="comment">(require 'planner-accomplishments)
+</span><span class="comment-delimiter">;; </span><span class="comment">(require 'planner-schedule)
+</span><span class="comment-delimiter">;; </span><span class="comment">(require 'planner-timeclock)
+</span><span class="comment-delimiter">;; </span><span class="comment">(require 'planner-notes)
+</span><span class="comment-delimiter">;; </span><span class="comment">(require 'planner-browser)
+</span>
+<span class="paren">(</span>planner-install-extra-task-keybindings<span class="paren">)</span>
+<span class="paren">(</span>setq planner-carry-tasks-forward  7
+      planner-use-other-window     nil
+      planner-annotation-strip-directory t
+      planner-directory            <span class="string">"~/doc/plans"</span>
+      planner-publishing-directory <span class="string">"~/html/plans"</span>
+      planner-diary-string         <span class="string">"* Schedule"</span>
+      planner-plan-page-template   <span class="string">"* Overview\n\n\n* Notes\n\n\n* Tasks\n\n\n"</span>
+      planner-day-page-template    <span class="paren">(</span>concat <span class="string">"* Tasks\n\n\n"</span> planner-diary-string <span class="string">"\n\n\n* Notes\n\n\n"</span><span class="paren">)</span>
+<span class="paren">)</span>
+
+<span class="paren">(</span>add-to-list 'auto-mode-alist '<span class="paren">(</span><span class="string">".*/doc/plans/.*$"</span> . planner-mode<span class="paren">))</span>
+
+<span class="paren">(</span>planner-option-customized 'planner-directory planner-directory<span class="paren">)</span>
+<span class="paren">(</span>planner-option-customized 'planner-custom-variables
+             '<span class="paren">((</span>planner-publishing-directory . <span class="string">"~/html/plans"</span><span class="paren">)</span>
+               <span class="paren">))</span>
+
+<span class="paren">(</span><span class="keyword">defun</span> <span class="function-name">planner-annotation-from-dired</span> <span class="paren">()</span>
+  <span class="doc">"Return the filename on the current line in dired"</span>
+  <span class="paren">(</span><span class="keyword">when</span> <span class="paren">(</span>planner-derived-mode-p 'dired-mode<span class="paren">)</span>
+    <span class="paren">(</span>concat <span class="string">"[["</span> <span class="paren">(</span>dired-get-filename<span class="paren">)</span> <span class="string">"][file:"</span> <span class="paren">(</span>dired-get-filename t<span class="paren">)</span> <span class="string">"]]"</span><span class="paren">)))</span>
+
+<span class="paren">(</span>add-hook 'planner-annotation-functions 'planner-annotation-from-dired<span class="paren">)</span>
+
+<span class="comment-delimiter">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><span class="comment">
+</span><span class="comment-delimiter">;;;</span><span class="comment">_ + Schedule 
+</span><span class="comment-delimiter">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><span class="comment">
+</span><span class="paren">(</span>planner-calendar-insinuate<span class="paren">)</span>
+<span class="comment-delimiter">;; </span><span class="comment">(planner-diary-insinuate)
+</span>
+<span class="paren">(</span>setq planner-diary-cal-desk-string  planner-diary-string
+      planner-diary-use-diary t
+      planner-diary-use-private-diary nil
+      planner-diary-use-public-diary nil
+      planner-diary-use-appts nil
+      planner-diary-use-cal-desk nil<span class="paren">)</span>
+
+<span class="paren">(</span><span class="keyword">defun</span> <span class="function-name">planner-diary-add-entry</span> <span class="paren">(</span>date time text<span class="paren">)</span>
+  <span class="doc">"Prompt for a diary entry to add to `</span><span class="doc"><span class="constant">diary-file</span></span><span class="doc">'.  Will run
+   planner-annotations to make hyper links"</span>
+  <span class="paren">(</span>interactive <span class="paren">(</span>list <span class="paren">(</span>planner-read-date<span class="paren">)</span>
+                     <span class="paren">(</span>read-string <span class="string">"Time: "</span><span class="paren">)</span>
+                     <span class="paren">(</span>read-string <span class="string">"Diary entry: "</span><span class="paren">)))</span>
+  <span class="paren">(</span><span class="keyword">save-excursion</span>
+    <span class="paren">(</span><span class="keyword">save-window-excursion</span>
+      <span class="paren">(</span>make-diary-entry
+       <span class="paren">(</span>concat
+        <span class="paren">(</span><span class="keyword">let</span> <span class="paren">((</span>cal-date <span class="paren">(</span>planner-filename-to-calendar-date date<span class="paren">)))</span>
+          <span class="paren">(</span><span class="keyword">if</span> european-calendar-style
+              <span class="paren">(</span>format <span class="string">"%d/%d/%d"</span>
+                      <span class="paren">(</span>elt cal-date 1<span class="paren">)</span>
+                      <span class="paren">(</span>elt cal-date 0<span class="paren">)</span>
+                      <span class="paren">(</span>elt cal-date 2<span class="paren">))</span>
+            <span class="paren">(</span>format <span class="string">"%d/%d/%d"</span>
+                    <span class="paren">(</span>elt cal-date 0<span class="paren">)</span>
+                    <span class="paren">(</span>elt cal-date 1<span class="paren">)</span>
+                    <span class="paren">(</span>elt cal-date 2<span class="paren">))))</span>
+        <span class="string">" "</span> time <span class="string">" "</span> text <span class="string">" "</span>
+        <span class="paren">(</span>run-hook-with-args-until-success
+         'planner-annotation-functions<span class="paren">))))))</span>
+
+<span class="comment-delimiter">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><span class="comment">
+</span><span class="comment-delimiter">;;;</span><span class="comment">_* Blog RSS
+</span><span class="comment-delimiter">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><span class="comment">
+</span>
+<span class="paren">(</span>setq planner-rss-initial-contents
+      <span class="string">"&lt;?xml version=\"1.0\" encoding=\"8859-1\"?&gt;
+  &lt;rss version=\"2.0\"&gt;
+    &lt;channel&gt;
+      &lt;title&gt;Sugarshark's musings&lt;/title&gt;
+      &lt;link&gt;http://sugarshark.com/JournalPage.html&lt;/link&gt;
+      &lt;description&gt;Random notes&lt;/description&gt;
+    &lt;/channel&gt;
+  &lt;/rss&gt;"</span>
+      planner-rss-base-url <span class="string">"http://sugarshark.com/journal/"</span>
+      planner-rss-file-name <span class="string">"/home/ole/html/plans/blog.rdf"</span>
+      <span class="paren">)</span>
+
+<span class="comment-delimiter">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><span class="comment">
+</span><span class="comment-delimiter">;;;</span><span class="comment">_* Bibl
+</span><span class="comment-delimiter">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><span class="comment">
+</span><span class="paren">(</span>add-to-list 'load-path <span class="paren">(</span>expand-file-name <span class="string">"bibl-mode"</span> emacs-packages-dir<span class="paren">))</span>
+<span class="paren">(</span><span class="keyword">require</span> '<span class="constant">bibl-mode</span><span class="paren">)</span>
+<span class="paren">(</span>setq bibl-file-name <span class="paren">(</span>expand-file-name <span class="string">"~/doc/bibliography"</span><span class="paren">))</span>
+<span class="paren">(</span>add-to-list 'auto-mode-alist '<span class="paren">(</span><span class="string">"bibliography$"</span> . bibl-mode<span class="paren">))</span>
+<span class="paren">(</span>bibl-update-record-fields<span class="paren">)</span>
+
+<span class="paren">(</span>define-key mode-specific-map [?b]  'bibl-global-map<span class="paren">)</span>
+
+<span class="comment-delimiter">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><span class="comment">
+</span><span class="comment-delimiter">;;;</span><span class="comment">_* Remember
+</span><span class="comment-delimiter">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><span class="comment">
+</span><span class="paren">(</span>add-to-list 'load-path <span class="paren">(</span>expand-file-name <span class="string">"remember/"</span> emacs-packages-dir<span class="paren">))</span>
+
+<span class="paren">(</span><span class="keyword">require</span> '<span class="constant">remember</span><span class="paren">)</span>
+<span class="paren">(</span><span class="keyword">require</span> '<span class="constant">remember-bbdb</span><span class="paren">)</span>
+<span class="paren">(</span><span class="keyword">require</span> '<span class="constant">remember-bibl</span><span class="paren">)</span>
+<span class="paren">(</span><span class="keyword">require</span> '<span class="constant">remember-planner</span><span class="paren">)</span>
+<span class="paren">(</span><span class="keyword">require</span> '<span class="constant">remember-diary</span><span class="paren">)</span>
+<span class="paren">(</span><span class="keyword">require</span> '<span class="constant">remember-emacs-wiki-journal</span><span class="paren">)</span>
+
+<span class="comment-delimiter">;; </span><span class="comment">Use BBDB to complete names and addresses
+</span><span class="paren">(</span>setq remember-use-bbdb t
+      remember-handler-functions '<span class="paren">(</span>remember-diary-extract-entries
+                                   remember-emacs-wiki-journal-add-entry-maybe
+                                   remember-planner-append<span class="paren">)</span>
+      remember-annotation-functions planner-annotation-functions
+      remember-save-after-remembering t
+      <span class="comment-delimiter">;; </span><span class="comment">describe-function: format-time-string
+</span>      remember-planner-timestamp-format <span class="string">"\n*** Note taken on %A, %d.%m.%Y at %H:%M %Z"</span>
+      <span class="comment-delimiter">;; </span><span class="comment">possible functions:
+</span>      <span class="comment-delimiter">;;     </span><span class="comment">remember-planner-add-timestamp,
+</span>      <span class="comment-delimiter">;;     </span><span class="comment">remember-planner-add-xref
+</span>      <span class="comment-delimiter">;;     </span><span class="comment">planner-rss-add-note
+</span>      remember-append-to-planner-hook '<span class="paren">(</span>remember-planner-add-xref
+                                        planner-rss-add-note<span class="paren">)</span>
+      <span class="paren">)</span>
+
+<span class="paren">(</span><span class="keyword">defun</span> <span class="function-name">my-remember-mode-hook</span> <span class="paren">()</span>
+  <span class="doc">"Switch wiki mode on in the remember buffer"</span>
+  <span class="paren">(</span>emacs-wiki-mode<span class="paren">)</span>
+  <span class="paren">(</span>use-local-map remember-mode-map<span class="paren">)</span>
+  <span class="paren">(</span>setq major-mode 'remember-mode
+        mode-name <span class="string">"Remember"</span><span class="paren">))</span>
+
+<span class="comment-delimiter">;; </span><span class="comment">(setq remember-mode-hook nil)
+</span><span class="paren">(</span>add-hook 'remember-mode-hook 'my-remember-mode-hook<span class="paren">)</span>
+
+<span class="comment-delimiter">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><span class="comment">
+</span><span class="comment-delimiter">;;;</span><span class="comment">_* Remembrance agent
+</span><span class="comment-delimiter">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><span class="comment">
+</span>
+<span class="comment-delimiter">;; </span><span class="comment">(require 'remem)
+</span>
+<span class="comment-delimiter">;; </span><span class="comment">(setq remem-prog-dir (expand-file-name "/usr/bin/"))
+</span><span class="comment-delimiter">;; </span><span class="comment">(setq remem-database-dir (expand-file-name "~/.ra-index"))
+</span>
+<span class="comment-delimiter">;; </span><span class="comment">(setq remem-scopes-list '(("mail" 3 6 300)
+</span><span class="comment-delimiter">;; </span><span class="comment">                       ("doc" 3 10 300)))
+</span>
+<span class="comment-delimiter">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><span class="comment">
+</span><span class="comment-delimiter">;;;</span><span class="comment">_* ETask
+</span><span class="comment-delimiter">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span><span class="comment">
+</span><span class="comment-delimiter">;; </span><span class="comment">(add-to-list 'load-path (expand-file-name "etask/" emacs-packages-dir))
+</span><span class="comment-delimiter">;; </span><span class="comment">(require 'etask)
+</span></pre>
+  </body>
+</html>
