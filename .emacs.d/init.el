@@ -6,8 +6,6 @@
 ;; Add my local configuration folder
 (setq load-path (cons "~/.emacs.d" load-path))
 
-
-
 (require 'org-install)
 (require 'remember)
 (require 'init-org)
@@ -56,7 +54,7 @@
 
 (setq tex-command "pdftex")
 (setq tex-dvi-view-command "~/bin/latex-view.sh '*'")
-(add-to-list 'load-path "~/.emacs.d/feature-mode")
+(add-to-list 'load-path "~/.emacs.d/cucumber.el")
 ;; optional configurations
 ;; default language if .feature doesn't have "# language: fi"
 ;(setq feature-default-language "fi")
