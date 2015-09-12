@@ -1,89 +1,31 @@
-
+;; This is the Aquamacs Preferences file.
+;; Add Emacs-Lisp code here that should be executed whenever
+;; you start Aquamacs Emacs. If errors occur, Aquamacs will stop
+;; evaluating this file and print errors in the *Messags* buffer.
+;; Use this file in place of ~/.emacs (which is loaded as well.)
 
 ;; start server for fast startups
 (server-start)
 
+
+(require 'package)
+(package-initialize)
+
 ;; Add my local configuration folder
 (setq load-path (cons "~/.emacs.d" load-path))
 
+(require 'nginx-mode)
+(require 'helm-config)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(helm-mode 1)
+(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+(global-set-key (kbd "C-x b") 'helm-mini)
+(global-set-key (kbd "C-x g") 'helm-do-grep)
+(helm-autoresize-mode t)
+(setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
 
-
-(require 'org-install)
-(require 'remember)
-(require 'init-org)
-(require 'init-gnus)
-(require 'init-bbdb)
-(require 'setnu+)
-(require 'scss-mode)
-(setq scss-compile-at-save nil)
-;;(require 'frame-restore)
-(require 'minimap)
-;;(require 'newlisp)
-(require 'column-marker)
-;;(require 'rdebug)
-(require 'dired+)
-(require 'centered-cursor-mode)
-(require 'buff-menu+)
-
-;; have some coffee
-(add-to-list 'load-path "~/.emacs.d/coffee-mode")
-(require 'coffee-mode)
-;; set to two spaces
-(defun coffee-custom ()
-  "coffee-mode-hook"
- (set (make-local-variable 'tab-width) 2))
-
-(add-hook 'coffee-mode-hook
-  '(lambda() (coffee-custom)))
-
-(add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
-(add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
-
-;; (setq load-path (cons "~/.emacs.d/jquery-doc" load-path))
-;; (require 'jquery-doc)
-;; (add-hook 'js2-mode-hook 'jquery-doc-setup)
-
-
-(add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode))
-(autoload 'csv-mode "csv-mode"
-   "Major mode for editing comma-separated value files." t)
-
-;; etask task tracking
-(add-to-list 'load-path "~/.emacs.d/etask/")
-(require 'etask)
-
-(defun check-calendar-holidays (date)  )
-
-(setq tex-command "pdftex")
-(setq tex-dvi-view-command "~/bin/latex-view.sh '*'")
-(add-to-list 'load-path "~/.emacs.d/feature-mode")
-;; optional configurations
-;; default language if .feature doesn't have "# language: fi"
-;(setq feature-default-language "fi")
-;; point to cucumber languages.yml or gherkin i18n.yml to use
-;; exactly the same localization your cucumber uses
-;(setq feature-default-i18n-file "/path/to/gherkin/gem/i18n.yml")
-;; and load feature-mode
-(require 'feature-mode)
-(add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
-
-
-(setq load-path (cons "~/.emacs.d/magit-0.8.2" load-path))
-(require 'magit)
-
-(add-to-list 'load-path "~/.emacs.d/mo-git-blame")
-(autoload 'mo-git-blame-file "mo-git-blame" nil t)
-(autoload 'mo-git-blame-current "mo-git-blame" nil t)
-
-(require 'flymake)
-
-;; add emacs-rails subfolder
-(setq load-path (cons "~/.emacs.d/emacs-rails" load-path))
-(require 'rails)
-(add-hook 'rails-mode-hook
-          '(lambda ()
-             (define-key ruby-mode-map [TAB]
-               'indent-line)))
 
 ;; settings
 (one-buffer-one-frame-mode 0)           ; turn off one buffer per frame
@@ -107,17 +49,6 @@
 ;; Use "y or n" answers instead of full words "yes or no"
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; ;; load nxhtml
-;; (load "~/.emacs.d/nxhtml/autostart.el")
-;; (setq
-;;  nxhtml-global-minor-mode t
-;;  mumamo-chunk-coloring 'submode-colored
-;;  nxhtml-skip-welcome t
-;;  indent-region-mode t
-;;  rng-nxml-auto-validate-flag nil
-;;  nxml-degraded t)
-
-
 
 ;; set default style
 (setq c-default-style "bsd")
@@ -127,16 +58,6 @@
 (require 'paren)
 (show-paren-mode 1)
 
-(custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(face-font-family-alternatives (quote (("twlgmono" "bitstream" "freemono" "dejavu" "courier" "fixed") ("dejavu" "helv" "helvetica" "arial" "fixed"))))
- '(org-agenda-files (quote ("~/Dropbox/gtd/todo.org")))
- '(org-default-notes-file "~/Dropbox/gtd/notes.org")
- '(speedbar-default-position (quote right))
- '(sql-ms-program "isql"))
 
 ;; turn on font coloring
 (global-font-lock-mode 1)
@@ -147,8 +68,9 @@
 
 (setq frame-title-format "%b")
 
-
-;;(require 'pabbrev)
+;; turn off whitespace in diffs
+(setq vc-diff-switches '("-b" "-B" "-u"))
+(setq vc-git-diff-switches nil)
 
 ;; Kills all the buffers except scratch
 ;; obtained from http://www.chrislott.org/geek/emacs/dotemacs.html
@@ -159,19 +81,15 @@
           (buffer-list))
   (delete-other-windows))
 
-;; opens the FWK project
-(defun fwk-open()
-  (interactive)
-  (find-file "~/Projects/knowledge/sites/all/modules/fwk"))
 
 ;; opens the development folder
 (defun projects()
   (interactive "*")
   (find-file "~/Projects"))
 ;; opens the catapult folder
-(defun catapult()
+(defun babylon()
   (interactive "*")
-  (find-file "~/catapult"))
+  (find-file "~/Projects/Babylon"))
 
 
 
@@ -205,21 +123,6 @@ If the new path's directories does not exist, create them."
 
   (add-to-list 'flymake-allowed-file-name-masks '("\\.py\\'" flymake-pylint-init)))
 
-;; javascript flymake
-(require 'flymake-jslint)
-(add-hook 'javascript-mode-hook
-          (lambda () (flymake-mode 1)))
-
-
-;;(require 'sym-comp)
-;;(autoload 'comint-mode "comint")
-
-;; ido helps complete things like filenames
-(require 'ido)
-(ido-mode t)
-(setq ido-enable-flex-matching t)
-(setq ido-default-buffer-method 'selected-window)
-(setq ido-default-file-method 'selected-window)
 
 (autoload 'goto-last-change "goto-last-change"
   "Set point to the position of the last change." t)
@@ -231,13 +134,9 @@ If the new path's directories does not exist, create them."
 (require 'python)
 ;; pymacs
 (autoload 'pymacs-load "pymacs" nil t)
-
 (autoload 'pymacs-eval "pymacs" nil t)
 (autoload 'pymacs-apply "pymacs")
 (autoload 'pymacs-call "pymacs")
-
-(add-to-list 'load-path "~/.emacs.d/ruby-end")
-(require 'ruby-end)
 
 ;; DATES AND TIMES
 (defvar insert-time-format "%T"
@@ -268,15 +167,8 @@ If the new path's directories does not exist, create them."
 
 (defun device-baud-rate() (* 1 100000))
 
-;; some random binds
-;;(global-set-key [ f5] 'shell)
-;;(global-set-key [ f6] 'replace-string)
-;;(global-set-key [ f7] 'setnu-mode)
-(global-set-key [S-insert] 'cua-paste)
-(global-unset-key [insert])
-(global-unset-key "\C-xf")
 
-(global-set-key "\C-x\C-b" 'buffer-menu)
+
 
 (autoload 'markdown-mode "markdown-mode.el"
   "Major mode for editing Markdown files" t)
@@ -285,17 +177,14 @@ If the new path's directories does not exist, create them."
 
 
 ;; ruby mode
-(autoload 'ruby-mode "ruby-mode" "Major mode for editing ruby scripts." t)
-(setq auto-mode-alist (cons '("\\.rb$" . ruby-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.rake$" . ruby-mode) auto-mode-alist))
-(setq interpreter-mode-alist (append '(("ruby" . ruby-mode)) interpreter-mode-alist))
+(setq auto-mode-alist (cons '("\\.rb$" . enh-ruby-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.rake$" . enh-ruby-mode) auto-mode-alist))
+(setq interpreter-mode-alist (append '(("ruby" . enh-ruby-mode)) interpreter-mode-alist))
 
 
-
-;; sass mode
-(autoload 'sass-mode "sass-mode" "Sass editing mode." t)
-(setq auto-mode-alist (cons '("\\.sass$" . sass-mode) auto-mode-alist))
-(setq interpreter-mode-alist (cons '("sass" . sass-mode) interpreter-mode-alist))
+(setq interpreter-mode-alist (cons '("sass" . scss-mode) interpreter-mode-alist))
+(setq auto-mode-alist (cons '("\\.scss$" . scss-mode) auto-mode-alist))
+(setq interpreter-mode-alist (cons '("scss" . scss-mode) interpreter-mode-alist))
 (setq-default c-basic-offset 2)
 ;; yaml mode
 (autoload 'yaml-mode "yaml-mode" "Yaml editing mode." t)
@@ -347,61 +236,13 @@ If the new path's directories does not exist, create them."
                     :foreground "White" :background "Firebrick")
 
 (let ((prog-modes '( c-mode c++-mode java-mode ada-mode sh-mode tcl-mode
-                            cperl-mode php-mode python-mode ruby-mode lisp-mode ))
+                            cperl-mode php-mode python-mode ruby-mode enh-ruby-mode lisp-mode ))
       (pattern "\\<\\(IMPORTANT\\|FIXME\\|TODO\\|@todo:\\|NOTE\\|note:\\|HACK\\|WTF\\):"))
   (mapcar(lambda (mode)
            (font-lock-add-keywords mode `((,pattern 1 'special-words prepend))))
          prog-modes))
 
 
-
-
-
-(add-hook 'python-mode-hook 'fold-hook)
-;; this gets called by outline to determine the level. Just use the length of the whitespace
-(defun py-outline-level ()
-  (let (buffer-invisibility-spec)
-    (save-excursion
-      (skip-chars-forward "\t ")
-      (current-column))))
-                                        ; this gets called after python mode is enabled
-(defun fold-hook ()
-                                        ; outline uses this regexp to find headers. I match lines with no
-                                        ; indent and indented "class" and "def" lines.
-  (setq outline-regexp "[^ \t]\\|[ \t]*\\(def\\|class\\) ")
-                                        ; enable our level computation
-  (setq outline-level 'py-outline-level)
-  (setq outline-minor-mode-prefix "\C-co")
-                                        ; turn on outline mode
-  (outline-minor-mode t)
-  (setq version-control t)
-  (setq kept-old-versions 20)
-  (setq kept-new-versions 20)
-  (setq trim-versions-without-asking t)
-  (fill-minor-mode t)
-                                        ; initially hide all but the headers
-                                        ;(hide-body)
-  )
-
-(add-hook 'python-mode-hook (lambda () (interactive) (column-marker-1 80)))
-
-
-(cond ((fboundp 'global-font-lock-mode)
-       ;; ;; Customize face attributes
-       ;; (setq font-lock-face-attributes
-       ;;       ;; Symbol-for-Face Foreground Background Bold Italic Underline
-       ;;       '((font-lock-comment-face       "DarkGreen" nil nil t)
-       ;;         (font-lock-string-face        "Sienna" nil nil nil)
-       ;;         (font-lock-keyword-face       "RoyalBlue" nil t nil)
-       ;;         (font-lock-function-name-face "Red" nil nil nil)
-       ;;         (font-lock-variable-name-face "White" nil t nil)
-       ;;         (font-lock-type-face          "DarkBlue" nil t nil)))
-       ;; Load the font-lock package.
-       (require 'font-lock)
-       ;; Maximum colors
-       (setq font-lock-maximum-decoration t)
-       ;; Turn on font-lock in all modes that support it
-       (global-font-lock-mode t)))
 
 (defun reformat-line()
   (interactive)
@@ -452,9 +293,31 @@ If the new path's directories does not exist, create them."
 (setq interpreter-mode-alist (cons '("haml" . haml-mode) interpreter-mode-alist))
 (require 'haml-mode)
 
+;; yaml mode
+  (require 'yaml-mode)
+    (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
 
-(setq mac-function-modifier 'ctrl) ;- Sets the function key as control within emacs?
+;; web mode
+(setq web-mode-enable-current-column-highlight t)
+(require 'web-mode)
+
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(defun my-web-mode-hook ()
+  "Hooks for Web mode."
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (set-face-attribute 'web-mode-symbol-face nil :foreground "Brown")
+)
+(add-hook 'web-mode-hook  'my-web-mode-hook)
+(setq-default indent-tabs-mode nil)
+
 
 (cua-mode t)
 (tabbar-mode t)
@@ -471,43 +334,16 @@ If the new path's directories does not exist, create them."
 (setq mac-option-modifier 'meta) ;- Sets the option key as Meta (this is default)
 
 
-(defun wicked/php-mode-init ()
-   "Set some buffer-local variables."
-   (setq case-fold-search t)
-   (setq indent-tabs-mode nil)
-   (setq fill-column 78)
-   (setq c-basic-offset 2)
-   (c-set-offset 'arglist-cont 0)
-   (c-set-offset 'arglist-intro '+)
-   (c-set-offset 'case-label 2)
-   (c-set-offset 'arglist-close 0))
- (add-hook 'php-mode-hook 'wicked/php-mode-init)
-
-(defun slabgorb/js-mode-init ()
-   "Set some buffer-local variables."
-   (setq case-fold-search t)
-   (setq indent-tabs-mode nil)
-   (setq fill-column 78)
-   (setq c-basic-offset 2))
- (add-hook 'js-mode-hook 'slabgorb/js-mode-init)
 
 (global-hl-line-mode 1)
 
 ;; Key bindings
 (osx-key-mode t)
 (define-key osx-key-mode-map "\C-z" 'undo)
-;; (global-set-key "\C-cm" 'start-kbd-macro)
-;; (global-set-key "\C-cn" 'end-kbd-macro)
-;; (global-set-key "\C-ck" 'call-last-kbd-macro)
 (global-set-key "\C-cq" 'hippie-expand)
 (global-set-key "\C-cb" 'reformat-line)
 (global-set-key "\C-cf" 'aquamacs-toggle-full-frame)
 (global-set-key "\C-cg" 'magit-status)
-
-
-;; Highlight currently selected line
-(set-face-background 'hl-line "#333333")  ;; Emacs 22 Only
-(set-face-foreground 'hl-line "#FFFFFF")  ;; Emacs 22 Only
 
 (defun show-onelevel ()
   "show entry and children in outline mode"
@@ -515,22 +351,7 @@ If the new path's directories does not exist, create them."
   (show-entry)
   (show-children))
 ;;
-(defun slabgorb-outline-bindings ()
-  "sets shortcut bindings for outline minor mode"
-  (interactive)
-  (local-set-key [?\C-,] 'hide-sublevels)
-  (local-set-key [?\C-.] 'show-all)
-  (local-set-key [C-up] 'outline-previous-visible-heading)
-  (local-set-key [C-down] 'outline-next-visible-heading)
-  (local-set-key [C-left] 'hide-subtree)
-  (local-set-key [C-right] 'show-onelevel)
-  (local-set-key [M-up] 'outline-backward-same-level)
-  (local-set-key [M-down] 'outline-forward-same-level)
-  (local-set-key [M-left] 'hide-subtree)
-  (local-set-key [M-right] 'show-subtree))
-;;
-(add-hook 'outline-minor-mode-hook
-          'slabgorb-outline-bindings)
+
 ;;
 (add-hook 'php-mode-user-hook
           '(lambda ()
@@ -565,18 +386,6 @@ If the new path's directories does not exist, create them."
 (setq debug-on-error nil)               ; turn off debugger because of recursive edit annoyance
 
 
-;; (defun slabgorb-text-mode()
-;;      (set-truncate-lines)
-;;      (auto-fill-mode -1))
-
-;; ;; turn off fill mode for text and org
-;; (add-hook 'text-mode-hook (slabgorb-text-mode))
-;; (add-hook 'org-mode-hook (slabgorb-text-mode))
-
-
-
-;; DARKROOM SUPPORT
-;; Darkroom hides everything but emacs
 
 ; hide mode line, from
 ; http://dse.livejournal.com/66834.html
@@ -599,27 +408,6 @@ If the new path's directories does not exist, create them."
 (defvar darkroom-enabled nil)
 
 (setq mode-line-format "%*%+ %b %l:%c %I %s")
-
-
-(defun toggle-darkroom ()
-  (interactive)
-  (if (not darkroom-enabled)
-      (setq darkroom-enabled t)
-    (setq darkroom-enabled nil))
-  (toggle-fullscreen)
-  (hide-mode-line)
-  (if darkroom-enabled
-      (progn
-        (fringe-mode 'both)
-        (menu-bar-mode -1)
-        (set-fringe-mode 200))
-    (progn
-      (fringe-mode 'default)
-      (menu-bar-mode)
-      (set-fringe-mode 8))))
-
-; Activate with F11 - enhanced fullscreen :)
-(global-set-key "\C-cd" 'toggle-darkroom)
 
 
 
@@ -652,7 +440,7 @@ If the new path's directories does not exist, create them."
         (when (and node
                    (= js2-NAME (js2-node-type node))
                    (= js2-VAR (js2-node-type (js2-node-parent node))))
-          (setq indentation (+ 4 indentation))))
+          (setq indentation (+ 2 indentation))))
 
       (indent-line-to indentation)
       (when (> offset 0) (forward-char offset)))))
@@ -710,7 +498,7 @@ If the new path's directories does not exist, create them."
     "/Applications/mit-scheme.app/Contents/Resources/mit-scheme")
 (load-library "xscheme")
 
-(setq-default tab-width 4)
+(setq-default tab-width 2)
 (scroll-bar-mode -1)
 
 
@@ -720,48 +508,6 @@ If the new path's directories does not exist, create them."
      (defvar ,symbol nil ,docstring)
      (setq   ,symbol ,initvalue)))
 
-(defparameter th-frame-config-register ?°
-  "The register which is used for storing and restoring frame
-configurations by `th-save-frame-configuration' and
-`th-jump-to-register'.")
-
-
-(defun th-save-frame-configuration (arg)
-  "Stores the current frame configuration in register
-`th-frame-config-register'. If a prefix argument is given, you
-can choose which register to use."
-  (interactive "P")
-  (let ((register (if arg
-                      (read-char "Which register? ")
-                    th-frame-config-register)))
-    (frame-configuration-to-register register)
-    (message "Frame configuration saved in register '%c'."
-             register)))
-
-(defun th-jump-to-register (arg)
-  "Jumps to register `th-frame-config-register'. If a prefix
-argument is given, you can choose which register to jump to."
-  (interactive "P")
-  (let ((register (if arg
-                      (read-char "Which register? ")
-                    th-frame-config-register)))
-    (jump-to-register register)
-    (message "Jumped to register '%c'."
-             register)))
-
-(global-set-key "\C-ch" 'th-save-frame-configuration)
-(global-set-key "\C-cj" 'th-jump-to-register)
-
-;; Emacs macro to add a pomodoro item
-(fset 'pomodoro
-   "[ ]")
-
-;; Emacs macro to add a pomodoro table
-;;
-;; | G | Organization | [ ] |
-;; |   |              |     |
-(fset 'pomodoro-table
-   [?| ?  ?G ?  ?| ?  ?O ?r ?g ?a ?n ?i ?z ?a ?t ?i ?o ?n ?  ?| ?  ?\[ ?  ?\] ?  ?| tab])
 
 
 ;;; from http://www.cb1.com/~john/
@@ -807,42 +553,7 @@ argument is given, you can choose which register to jump to."
 
 (setq default-frame-alist '((left . 0) (width . 141) (height . 44)))
 (add-to-list 'default-frame-alist '(alpha . (100 85)))
-(defun transparency-set-initial-value ()
-  "Set initial value of alpha parameter for the current frame"
-  (interactive)
-  (if (equal (frame-parameter nil 'alpha) nil)
-      (set-frame-parameter nil 'alpha 100)))
 
-(defun transparency-set-value (numb)
-  "Set level of transparency for the current frame"
-  (interactive "nEnter transparency level in range 0-100: ")
-  (if (> numb 100)
-      (message "Error! The maximum value for transparency is 100!")
-    (if (< numb 0)
-        (message "Error! The minimum value for transparency is 0!")
-      (set-frame-parameter nil 'alpha numb))))
-
-(defun transparency-increase ()
-  "Increase level of transparency for the current frame"
-  (interactive)
-  (transparency-set-initial-value)
-   (if (> (frame-parameter nil 'alpha) 0)
-       (set-frame-parameter nil 'alpha (+ (frame-parameter nil 'alpha) -2))
-     (message "This is a minimum value of transparency!")))
-
-(defun transparency-decrease ()
-  "Decrease level of transparency for the current frame"
-  (interactive)
-  (transparency-set-initial-value)
-  (if (< (frame-parameter nil 'alpha) 100)
-      (set-frame-parameter nil 'alpha (+ (frame-parameter nil 'alpha) +2))
-    (message "This is a minimum value of transparency!")))
-
-;; sample keybinding for transparency manipulation
-(global-set-key (kbd "C-?") 'transparency-set-value)
-;; the two below let for smooth transparency control
-(global-set-key (kbd "C->") 'transparency-increase)
-(global-set-key (kbd "C-<") 'transparency-decrease)
 (add-hook 'yaml-mode-hook '(lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 (set-cursor-color 'red)
 
@@ -853,3 +564,166 @@ argument is given, you can choose which register to jump to."
 (setq default-cursor-type 'hollow)
 (blink-cursor-mode 1)
 (require 'color-theme)
+
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "https://marmalade-repo.org/packages/")
+                         ("melpa" . "http://melpa.org/packages/")))
+
+
+(global-linum-mode t)
+
+(setq tab-width 2) ; or any other preferred value
+    (defvaralias 'c-basic-offset 'tab-width)
+(defvaralias 'cperl-indent-level 'tab-width)
+
+
+(setq js-indent-level 2)
+
+
+(defun save-macro (name)
+    "save a macro. Take a name as argument
+     and save the last defined macro under
+     this name at the end of your .emacs"
+     (interactive "SName of the macro :")  ; ask for the name of the macro
+     (kmacro-name-last-macro name)         ; use this name for the macro
+     (find-file user-init-file)            ; open ~/.emacs or other user init file
+     (goto-char (point-max))               ; go to the end of the .emacs
+     (newline)                             ; insert a newline
+     (insert-kbd-macro name)               ; copy the macro
+     (newline)                             ; insert a newline
+     (switch-to-buffer nil))               ; return to the initial buffer
+
+
+(fset 'fix_colors
+   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([134217848 114 101 112 108 97 99 101 45 115 116 114 105 110 103 return 36 119 104 105 116 101 return 36 99 111 108 111 114 95 119 104 105 116 101 return 134217848 up return return 134217788 134217848 114 101 112 108 97 99 115 45 backspace backspace 101 45 115 116 114 tab return 36 99 backspace 98 108 111 97 99 backspace backspace backspace 97 99 107 return 36 99 111 108 111 114 95 98 108 97 99 107 return 134217848 116 101 backspace backspace 114 101 112 108 97 tab 115 116 114 105 110 103 return 95 112 112 114 111 120 return return 134217848 114 101 112 108 97 99 115 45 backspace backspace 101 45 115 116 114 105 110 103 return 95 97 112 112 114 111 99 backspace 120 return return 134217788] 0 "%d")) arg)))
+
+(fset 'insert_imports
+   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([134217788 64 105 109 112 111 114 116 39 backspace 32 39 118 97 114 105 97 98 108 101 115 39 59 return 64 105 109 112 111 114 116 32 39 109 105 120 105 110 115 59 backspace 39 59 return 24 19] 0 "%d")) arg)))
+
+
+(desktop-save-mode 1)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(aquamacs-additional-fontsets nil t)
+ '(aquamacs-customization-version-id 307 t)
+ '(aquamacs-tool-bar-user-customization nil t)
+ '(default-frame-alist
+    (quote
+     ((alpha 100 85)
+      (left . 0)
+      (width . 141)
+      (height . 44))))
+ '(global-hl-line-mode t)
+ '(global-linum-mode t)
+ '(ns-tool-bar-display-mode (quote both) t)
+ '(ns-tool-bar-size-mode nil t)
+ '(visual-line-mode nil t))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(dired-mode-default ((t (:inherit autoface-default :height 180 :family "Anonymous Pro"))) t)
+ '(emacs-lisp-mode-default ((t (:inherit prog-mode-default :height 150 :family "Anonymous Pro"))) t)
+ '(js-mode-default ((t (:inherit prog-mode-default :height 160 :family "Anonymous Pro"))) t)
+ '(ruby-mode-default ((t (:inherit prog-mode-default :height 160 :family "Anonymous Pro"))) t)
+ '(sass-mode-default ((t (:inherit haml-mode-default :height 180 :family "Anonymous Pro"))) t)
+ '(scss-mode-default ((t (:inherit css-mode-default :height 140 :family "Monaco"))) t)
+ '(web-mode-default ((t (:inherit web-mode-prog-mode-default :height 150 :family "Consolas"))) t)
+ '(yaml-mode-default ((t (:inherit autoface-default :height 160 :family "Anonymous Pro"))) t))
+
+
+
+;; Make sure the repository is loaded as early as possible
+(setq bm-restore-repository-on-load t)
+(require 'bm)
+
+;; Loading the repository from file when on start up.
+(add-hook' after-init-hook 'bm-repository-load)
+
+;; Restoring bookmarks when on file find.
+(add-hook 'find-file-hooks 'bm-buffer-restore)
+
+;; Saving bookmark data on killing a buffer
+(add-hook 'kill-buffer-hook 'bm-buffer-save)
+
+;; Saving the repository to file when on exit.
+;; kill-buffer-hook is not called when Emacs is killed, so we
+;; must save all bookmarks first.
+(add-hook 'kill-emacs-hook '(lambda nil
+                              (bm-buffer-save-all)
+                              (bm-repository-save)))
+
+;; Update bookmark repository when saving the file.
+(add-hook 'after-save-hook 'bm-buffer-save)
+
+;; Restore bookmarks when buffer is reverted.
+(add-hook 'after-revert-hook 'bm-buffer-restore)
+
+
+(global-set-key (kbd "<left-fringe> <mouse-5>") 'bm-next-mouse)
+(global-set-key (kbd "<left-fringe> <mouse-4>") 'bm-previous-mouse)
+(global-set-key (kbd "<left-fringe> <mouse-1>") 'bm-toggle-mouse)
+(global-set-key (kbd "<C-f2>") 'bm-toggle)
+(global-set-key (kbd "<f2>")   'bm-next)
+(global-set-key (kbd "<S-f2>") 'bm-previous)
+
+
+(add-hook 'after-init-hook 'global-company-mode)
+
+
+
+(global-set-key (kbd "<f8>")  #'whitespace-mode)
+(global-set-key (kbd "<f9>")  #'whitespace-cleanup)
+
+(defun whitespace-cleanup* ()
+  (let* ((modified-before-p (buffer-modified-p)))
+    (whitespace-cleanup)
+    (if (not modified-before-p)
+        (not-modified))))
+(defun whitespace-cleanup-on-save ()
+  (add-hook 'write-contents-hooks #'whitespace-cleanup*))
+(add-hook 'c-mode-common-hook   #'whitespace-cleanup-on-save)
+(add-hook 'emacs-lisp-mode-hook #'whitespace-cleanup-on-save)
+(add-hook 'python-mode-hook     #'whitespace-cleanup-on-save)
+(add-hook 'sh-mode-hook         #'whitespace-cleanup-on-save)
+(add-hook 'js-mode-hook         #'whitespace-cleanup-on-save)
+(add-hook 'coffee-mode-hook     #'whitespace-cleanup-on-save)
+(add-hook 'text-mode-hook       #'whitespace-cleanup-on-save)
+(add-hook 'enh-ruby-mode-hook   #'whitespace-cleanup-on-save)
+(add-hook 'web-mode-hook        #'whitespace-cleanup-on-save)
+(add-hook 'scss-mode-hook        #'whitespace-cleanup-on-save)
+(add-hook 'sass-mode-hook        #'whitespace-cleanup-on-save)
+
+(add-hook 'enh-ruby-mode-hook
+          (lambda () (modify-syntax-entry ?_ "w")))
+(add-hook 'scss-mode-hook
+          (lambda () (modify-syntax-entry ?_ "w")))
+
+(global-auto-revert-mode t)
+(defun revert-all-buffers ()
+  "Refreshes all open buffers from their respective files"
+  (interactive)
+  (let* ((list (buffer-list))
+         (buffer (car list)))
+    (while buffer
+      (when (and (buffer-file-name buffer)
+                 (not (buffer-modified-p buffer)))
+        (set-buffer buffer)
+        (revert-buffer t t t))
+      (setq list (cdr list))
+      (setq buffer (car list))))
+  (message "Refreshed open files"))
+
+
+ (defun dos2unix (buffer)
+      "Automate M-% C-q C-m RET C-q C-j RET"
+      (interactive "*b")
+      (save-excursion
+        (goto-char (point-min))
+        (while (search-forward (string ?\C-m) nil t)
+          (replace-match (string ?\C-j) nil t))))
