@@ -20,7 +20,12 @@
 (helm-mode 1)
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
 (global-set-key (kbd "C-x b") 'helm-mini)
+
 (global-set-key (kbd "C-x g") 'helm-do-grep)
+
+
+(global-set-key (kbd "C-x j") 'helm-semantic-or-imenu)
+
 (helm-autoresize-mode t)
 (setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
