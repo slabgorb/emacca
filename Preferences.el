@@ -51,7 +51,12 @@ Return a list of installed packages or nil for every skipped package."
 (helm-mode 1)
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
 (global-set-key (kbd "C-x b") 'helm-mini)
+
 (global-set-key (kbd "C-x g") 'helm-do-grep)
+
+
+(global-set-key (kbd "C-x j") 'helm-semantic-or-imenu)
+
 (helm-autoresize-mode t)
 (setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
@@ -285,7 +290,6 @@ If the new path's directories does not exist, create them."
 (setq auto-insert-query t)
 (define-auto-insert "\\.rb\\'" "autoinsert.rb")
 (define-auto-insert "\\.py\\'" "autoinsert.py")
-(define-auto-insert "\\.html\\'" "autoinsert.html")
 (add-hook 'find-file-hooks 'auto-insert)
 
 (defun update-template()
@@ -334,7 +338,9 @@ If the new path's directories does not exist, create them."
 (require 'web-mode)
 
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.ejs\\'" . web-mode))
+
+(add-to-list 'auto-mode-alist '("\\.htm\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
@@ -627,7 +633,7 @@ If the new path's directories does not exist, create them."
 (fset 'insert_imports
    (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([134217788 64 105 109 112 111 114 116 39 backspace 32 39 118 97 114 105 97 98 108 101 115 39 59 return 64 105 109 112 111 114 116 32 39 109 105 120 105 110 115 59 backspace 39 59 return 24 19] 0 "%d")) arg)))
 
-
+(set-face-background hl-line-face "#080808")
 (desktop-save-mode 1)
 
 (custom-set-variables
