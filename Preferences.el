@@ -20,11 +20,9 @@
 (helm-mode 1)
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
 (global-set-key (kbd "C-x b") 'helm-mini)
-
 (global-set-key (kbd "C-x g") 'helm-do-grep)
-
-
 (global-set-key (kbd "C-x j") 'helm-semantic-or-imenu)
+(global-set-key (kbd "C-x p") 'helm-occur)
 
 (helm-autoresize-mode t)
 (setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
@@ -552,7 +550,7 @@ If the new path's directories does not exist, create them."
 ;; from Sridhar Ratnakumar
 ;; http://stackoverflow.com/questions/3417438/closing-all-other-buffers-in-emacs
 (defun kill-all-buffers ()
-    "Kill all other buffers."
+    "Kill all buffers."
     (interactive)
     (mapc 'kill-buffer
          (remove-if-not 'buffer-file-name (buffer-list))))
@@ -734,3 +732,21 @@ If the new path's directories does not exist, create them."
         (goto-char (point-min))
         (while (search-forward (string ?\C-m) nil t)
           (replace-match (string ?\C-j) nil t))))
+
+
+
+;;; I want a key to open the current buffer all over the screen.
+(defun all-over-the-screen ()
+  (interactive)
+  (delete-other-windows)
+  (split-window-horizontally)
+  (balance-windows)
+  (follow-mode t))
+(global-set-key (kbd "<f6>") 'all-over-the-screen)
+
+(defun two-the-same (p)
+  (interactive)
+  (delete-other-windows)
+  (split-window-horizontally)
+  (balance-windows))
+(global-set-key (kbd "<f7>") 'two-the-same)
