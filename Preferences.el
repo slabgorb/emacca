@@ -4,37 +4,6 @@
 ;; evaluating this file and print errors in the *Messags* buffer.
 ;; Use this file in place of ~/.emacs (which is loaded as well.)
 
-
-
-
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "https://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.org/packages/")))
-
-(defun ensure-package-installed (&rest packages)
-  "Assure every package is installed, ask for installation if it’s not.
-
-Return a list of installed packages or nil for every skipped package."
-  (mapcar
-   (lambda (package)
-     ;; (package-installed-p 'evil)
-     (if (package-installed-p package)
-         nil
-       (if (y-or-n-p (format "Package %s is missing. Install it? " package))
-           (package-install package)
-         package)))
-   packages))
-
-;; make sure to have downloaded archive description.
-;; Or use package-archive-contents as suggested by Nicolas Dudebout
-(or (file-exists-p package-user-dir)
-    (package-refresh-contents))
-
-(ensure-package-installed 'web-mode 'nginx-mode 'with-editor 'scss-mode 'ruby-tools 'ruby-refactor 'ruby-hash-syntax 'ruby-end 'rubocop 'robe  'rails-log-mode 'org  'magit-popup 'magit 'inf-ruby 'helm-robe 'helm-rb 'helm-ag-r 'helm  'groovy-mode 'graphviz-dot-mode  'flymake-ruby 'flymake-jslint 'flymake-easy 'enh-ruby-mode 'dash  'csv-mode 'company 'coffee-mode 'bm  'async 'rainbow-delimiters )
-
-;; activate installed packages
-(package-initialize)
-
 ;; start server for fast startups
 (server-start)
 
@@ -43,7 +12,7 @@ Return a list of installed packages or nil for every skipped package."
 (package-initialize)
 
 ;; Add my local configuration folder
-(setq load-path (cons "~/.emacs.d" load-path))
+(setq load-path (cons "~/.emacs.d/lisp" load-path))
 
 (require 'nginx-mode)
 (require 'helm-config)
@@ -601,11 +570,16 @@ If the new path's directories does not exist, create them."
 (blink-cursor-mode 1)
 (require 'color-theme)
 
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "https://marmalade-repo.org/packages/")
+                         ("melpa" . "http://melpa.org/packages/")))
 
 
 (global-linum-mode t)
 
 (setq tab-width 2) ; or any other preferred value
+    (defvaralias 'c-basic-offset 'tab-width)
+(defvaralias 'cperl-indent-level 'tab-width)
 
 
 (setq js-indent-level 2)
@@ -664,7 +638,7 @@ If the new path's directories does not exist, create them."
  '(ruby-mode-default ((t (:inherit prog-mode-default :height 160 :family "Anonymous Pro"))) t)
  '(sass-mode-default ((t (:inherit haml-mode-default :height 180 :family "Anonymous Pro"))) t)
  '(scss-mode-default ((t (:inherit css-mode-default :height 140 :family "Monaco"))) t)
- '(web-mode-default ((t (:inherit web-mode-prog-mode-default :height 150 :family "Anonymous Pro"))) t)
+ '(web-mode-default ((t (:inherit web-mode-prog-mode-default :height 150 :family "Consolas"))) t)
  '(yaml-mode-default ((t (:inherit autoface-default :height 160 :family "Anonymous Pro"))) t))
 
 
@@ -729,6 +703,8 @@ If the new path's directories does not exist, create them."
 (add-hook 'web-mode-hook        #'whitespace-cleanup-on-save)
 (add-hook 'scss-mode-hook        #'whitespace-cleanup-on-save)
 (add-hook 'sass-mode-hook        #'whitespace-cleanup-on-save)
+
+(add-hook 'coffee-mode-hook 'flymake-coffee-load)
 
 (add-hook 'enh-ruby-mode-hook
           (lambda () (modify-syntax-entry ?_ "w")))
