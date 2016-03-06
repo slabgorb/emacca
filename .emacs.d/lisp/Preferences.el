@@ -1,23 +1,18 @@
+;; This is the Aquamacs Preferences file.
+;; Add Emacs-Lisp code here that should be executed whenever
+;; you start Aquamacs Emacs. If errors occur, Aquamacs will stop
+;; evaluating this file and print errors in the *Messags* buffer.
+;; Use this file in place of ~/.emacs (which is loaded as well.)
+
 ;; start server for fast startups
-(require 'diff-mode)
+(server-start)
+
 
 (require 'package)
 (package-initialize)
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "https://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.org/packages/")))
-(set-face-attribute 'default nil :height 140)
+
 ;; Add my local configuration folder
-(setq load-path (cons "~/.emacs.d/lisp" load-path))
-;; scroll one line at a time (less "jumpy" than defaults)
-
-(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
-
-(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
-
-(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
-
-(setq scroll-step 1) ;; keyboard scroll one line at a time
+(setq load-path (cons "~/.emacs.d" load-path))
 
 (require 'nginx-mode)
 (require 'helm-config)
@@ -36,6 +31,7 @@
 
 
 ;; settings
+(one-buffer-one-frame-mode 0)           ; turn off one buffer per frame
 (menu-bar-mode 1)                       ; turn on menubar
 (tool-bar-mode -1)                       ; turn off toolbar
 (setq inhibit-startup-message t)        ; turn off startup screen
@@ -97,6 +93,9 @@
 (defun babylon()
   (interactive "*")
   (find-file "~/Projects/Babylon"))
+
+
+
 
 ;; return a backup file path of a give file path
 ;; with full directory mirroring from a root dir
@@ -239,21 +238,13 @@ If the new path's directories does not exist, create them."
 (set-face-attribute 'special-words nil
                     :foreground "White" :background "Firebrick")
 
-(define-key function-key-map "\eOA" [up])
-(define-key function-key-map "\e[A" [up])
-(define-key function-key-map "\eOB" [down])
-(define-key function-key-map "\e[B" [down])
-(define-key function-key-map "\eOC" [right])
-(define-key function-key-map "\e[C" [right])
-(define-key function-key-map "\eOD" [left])
-(define-key function-key-map "\e[D" [left])
-
 (let ((prog-modes '( c-mode c++-mode java-mode ada-mode sh-mode tcl-mode
                             cperl-mode php-mode python-mode ruby-mode enh-ruby-mode lisp-mode ))
       (pattern "\\<\\(IMPORTANT\\|FIXME\\|TODO\\|@todo:\\|NOTE\\|note:\\|HACK\\|WTF\\):"))
   (mapcar(lambda (mode)
            (font-lock-add-keywords mode `((,pattern 1 'special-words prepend))))
          prog-modes))
+
 
 
 (defun reformat-line()
@@ -337,55 +328,23 @@ If the new path's directories does not exist, create them."
 (tabbar-mode t)
 
 
-;; (defun php-doc-paragraph-boundaries ()
-;;   (setq paragraph-separate "^[ \t]*\\(\\(/[/\\*]+\\)\\|\\(\\*+/\\)\\|\\(\\*?\\)\\|\\(\\*?[ \t]*@[[:alpha:]]+\\([ \t]+.*\\)?\\)\\)[ \t]*$")
-;;   (setq paragraph-start (symbol-value 'paragraph-separate)))
+(defun php-doc-paragraph-boundaries ()
+  (setq paragraph-separate "^[ \t]*\\(\\(/[/\\*]+\\)\\|\\(\\*+/\\)\\|\\(\\*?\\)\\|\\(\\*?[ \t]*@[[:alpha:]]+\\([ \t]+.*\\)?\\)\\)[ \t]*$")
+  (setq paragraph-start (symbol-value 'paragraph-separate)))
 
-;; (add-hook 'php-mode-user-hook 'php-doc-paragraph-boundaries)
+(add-hook 'php-mode-user-hook 'php-doc-paragraph-boundaries)
 
 
 (global-set-key [M-mouse-1] 'mouse-set-point)
-;; (setq mac-option-modifier 'meta) ;- Sets the option key as Meta (this is default)
-
-(require 'mouse)
-(xterm-mouse-mode t)
-(defun track-mouse (e))
-;; (setq mouse-sel-mode t)
+(setq mac-option-modifier 'meta) ;- Sets the option key as Meta (this is default)
 
 
-;; ===== Scrolling fix for advanced mouses =============================
-(defun up-slightly () (interactive) (scroll-up 2))
-(defun down-slightly () (interactive) (scroll-down 2))
-(global-set-key [mouse-4] 'down-slightly)
-(global-set-key [mouse-5] 'up-slightly)
-                                        ; Scroll up five lines with META held
-(global-set-key [M-mouse-4] 'down-slightly)
-(global-set-key [M-mouse-5] 'up-slightly)
-                                        ; Scroll up one line with SHIFT held
-(defun up-one () (interactive) (scroll-up 1))
-(defun down-one () (interactive) (scroll-down 1))
-(global-set-key [mouse-8] 'down-one)
-(global-set-key [mouse-9] 'up-one)
-; Scroll up one page with CTRL held
-(defun up-a-lot () (interactive) (scroll-up))
-(defun down-a-lot () (interactive) (scroll-down))
-(global-set-key [mouse-20] 'down-a-lot)
-(global-set-key [mouse-21] 'up-a-lot)
-(global-set-key (kbd "<C-mouse-4>") 'text-scale-decrease)
-(global-set-key (kbd "<C-mouse-5>") 'text-scale-increase)
 
 (global-hl-line-mode 1)
 
-(setq mac-command-modifier 'super)
-(global-set-key (kbd "s-<right>") 'move-end-of-line)
-(global-set-key (kbd "s-z") 'undo)
-(global-set-key (kbd "s-x") 'clipboard-kill-region)
-(global-set-key (kbd "s-x") 'clipboard-kill-ring-save)
-(global-set-key (kbd "s-v") 'clipboard-yank)
-
-;; key bindings
-;; (osx-key-mode t)
-(global-set-key "\C-z" 'undo)
+;; Key bindings
+(osx-key-mode t)
+(define-key osx-key-mode-map "\C-z" 'undo)
 (global-set-key "\C-cq" 'hippie-expand)
 (global-set-key "\C-cb" 'reformat-line)
 (global-set-key "\C-cf" 'aquamacs-toggle-full-frame)
@@ -411,25 +370,25 @@ If the new path's directories does not exist, create them."
              (setq outline-regexp " *\\(def \\|clas\\|#hea\\)")
              (hide-sublevels 1)))
 
-;; (defun flymake-php-init ()
-;;   "Use php to check the syntax of the current file."
-;;   (let* ((temp (flymake-init-create-temp-buffer-copy 'flymake-create-temp-inplace))
-;;          (local (file-relative-name temp (file-name-directory buffer-file-name))))
-;;     (list "php" (list "-f" local "-l"))))
+(defun flymake-php-init ()
+  "Use php to check the syntax of the current file."
+  (let* ((temp (flymake-init-create-temp-buffer-copy 'flymake-create-temp-inplace))
+         (local (file-relative-name temp (file-name-directory buffer-file-name))))
+    (list "php" (list "-f" local "-l"))))
 
-;; (add-to-list 'flymake-err-line-patterns
-;;   '("\\(Parse\\|Fatal\\) error: +\\(.*?\\) in \\(.*?\\) on line \\([0-9]+\\)$" 3 4 nil 2))
+(add-to-list 'flymake-err-line-patterns
+  '("\\(Parse\\|Fatal\\) error: +\\(.*?\\) in \\(.*?\\) on line \\([0-9]+\\)$" 3 4 nil 2))
 
-;; (add-to-list 'flymake-allowed-file-name-masks '("\\.php$" flymake-php-init))
+(add-to-list 'flymake-allowed-file-name-masks '("\\.php$" flymake-php-init))
 
-;; ;; Drupal-type extensions
-;; (add-to-list 'flymake-allowed-file-name-masks '("\\.module$" flymake-php-init))
-;; (add-to-list 'flymake-allowed-file-name-masks '("\\.install$" flymake-php-init))
-;; (add-to-list 'flymake-allowed-file-name-masks '("\\.inc$" flymake-php-init))
-;; (add-to-list 'flymake-allowed-file-name-masks '("\\.engine$" flymake-php-init))
+;; Drupal-type extensions
+(add-to-list 'flymake-allowed-file-name-masks '("\\.module$" flymake-php-init))
+(add-to-list 'flymake-allowed-file-name-masks '("\\.install$" flymake-php-init))
+(add-to-list 'flymake-allowed-file-name-masks '("\\.inc$" flymake-php-init))
+(add-to-list 'flymake-allowed-file-name-masks '("\\.engine$" flymake-php-init))
 
-;; (add-hook 'php-mode-hook (lambda () (flymake-mode 1)))
-;; (setq debug-on-error nil)               ; turn off debugger because of recursive edit annoyance
+(add-hook 'php-mode-hook (lambda () (flymake-mode 1)))
+(setq debug-on-error nil)               ; turn off debugger because of recursive edit annoyance
 
 
 
@@ -457,7 +416,7 @@ If the new path's directories does not exist, create them."
 
 
 
-;; ; espresso mode indentation for js
+; espresso mode indentation for js
 (autoload 'espresso-mode "espresso")
 (autoload 'js2-mode "js2")
 (defun my-js2-indent-function ()
@@ -540,18 +499,19 @@ If the new path's directories does not exist, create them."
 (add-hook 'js2-mode-hook 'my-js2-mode-hook)
 
 
-;; (setq scheme-program-name
-;;     "/Applications/mit-scheme.app/Contents/Resources/mit-scheme")
-;; (load-library "xscheme")
+(setq scheme-program-name
+    "/Applications/mit-scheme.app/Contents/Resources/mit-scheme")
+(load-library "xscheme")
 
 (setq-default tab-width 2)
+(scroll-bar-mode -1)
 
 
 
-;; (defmacro defparameter (symbol &optional initvalue docstring)
-;;   `(progn
-;;      (defvar ,symbol nil ,docstring)
-;;      (setq   ,symbol ,initvalue)))
+(defmacro defparameter (symbol &optional initvalue docstring)
+  `(progn
+     (defvar ,symbol nil ,docstring)
+     (setq   ,symbol ,initvalue)))
 
 
 
@@ -600,6 +560,7 @@ If the new path's directories does not exist, create them."
 (add-to-list 'default-frame-alist '(alpha . (100 85)))
 
 (add-hook 'yaml-mode-hook '(lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+(set-cursor-color 'red)
 
 ;; allow ssh after tramp
 (set-default 'tramp-default-proxies-alist (quote ((".*" "\\`root\\'" "/ssh:%h:"))))
@@ -607,9 +568,14 @@ If the new path's directories does not exist, create them."
 
 (setq default-cursor-type 'hollow)
 (blink-cursor-mode 1)
+(require 'color-theme)
+
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "https://marmalade-repo.org/packages/")
+                         ("melpa" . "http://melpa.org/packages/")))
+
 
 (global-linum-mode t)
-(setq linum-format "%4d \u2502 ")
 
 (setq tab-width 2) ; or any other preferred value
     (defvaralias 'c-basic-offset 'tab-width)
@@ -642,45 +608,77 @@ If the new path's directories does not exist, create them."
 (set-face-background hl-line-face "#080808")
 (desktop-save-mode 1)
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(aquamacs-additional-fontsets nil t)
+ '(aquamacs-customization-version-id 307 t)
+ '(aquamacs-tool-bar-user-customization nil t)
+ '(default-frame-alist
+    (quote
+     ((alpha 100 85)
+      (left . 0)
+      (width . 141)
+      (height . 44))))
+ '(global-hl-line-mode t)
+ '(global-linum-mode t)
+ '(ns-tool-bar-display-mode (quote both) t)
+ '(ns-tool-bar-size-mode nil t)
+ '(visual-line-mode nil t))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(dired-mode-default ((t (:inherit autoface-default :height 180 :family "Anonymous Pro"))) t)
+ '(emacs-lisp-mode-default ((t (:inherit prog-mode-default :height 150 :family "Anonymous Pro"))) t)
+ '(js-mode-default ((t (:inherit prog-mode-default :height 160 :family "Anonymous Pro"))) t)
+ '(ruby-mode-default ((t (:inherit prog-mode-default :height 160 :family "Anonymous Pro"))) t)
+ '(sass-mode-default ((t (:inherit haml-mode-default :height 180 :family "Anonymous Pro"))) t)
+ '(scss-mode-default ((t (:inherit css-mode-default :height 140 :family "Monaco"))) t)
+ '(web-mode-default ((t (:inherit web-mode-prog-mode-default :height 150 :family "Consolas"))) t)
+ '(yaml-mode-default ((t (:inherit autoface-default :height 160 :family "Anonymous Pro"))) t))
 
 
 
-;; ;; Make sure the repository is loaded as early as possible
-;; (setq bm-restore-repository-on-load t)
-;; (require 'bm)
+;; Make sure the repository is loaded as early as possible
+(setq bm-restore-repository-on-load t)
+(require 'bm)
 
-;; ;; Loading the repository from file when on start up.
-;; (add-hook' after-init-hook 'bm-repository-load)
+;; Loading the repository from file when on start up.
+(add-hook' after-init-hook 'bm-repository-load)
 
-;; ;; Restoring bookmarks when on file find.
-;; (add-hook 'find-file-hooks 'bm-buffer-restore)
+;; Restoring bookmarks when on file find.
+(add-hook 'find-file-hooks 'bm-buffer-restore)
 
-;; ;; Saving bookmark data on killing a buffer
-;; (add-hook 'kill-buffer-hook 'bm-buffer-save)
+;; Saving bookmark data on killing a buffer
+(add-hook 'kill-buffer-hook 'bm-buffer-save)
 
-;; ;; Saving the repository to file when on exit.
-;; ;; kill-buffer-hook is not called when Emacs is killed, so we
-;; ;; must save all bookmarks first.
-;; (add-hook 'kill-emacs-hook '(lambda nil
-;;                               (bm-buffer-save-all)
-;;                               (bm-repository-save)))
+;; Saving the repository to file when on exit.
+;; kill-buffer-hook is not called when Emacs is killed, so we
+;; must save all bookmarks first.
+(add-hook 'kill-emacs-hook '(lambda nil
+                              (bm-buffer-save-all)
+                              (bm-repository-save)))
 
-;; ;; Update bookmark repository when saving the file.
-;; (add-hook 'after-save-hook 'bm-buffer-save)
+;; Update bookmark repository when saving the file.
+(add-hook 'after-save-hook 'bm-buffer-save)
 
-;; ;; Restore bookmarks when buffer is reverted.
-;; (add-hook 'after-revert-hook 'bm-buffer-restore)
-
-
-;; (global-set-key (kbd "<left-fringe> <mouse-5>") 'bm-next-mouse)
-;; (global-set-key (kbd "<left-fringe> <mouse-4>") 'bm-previous-mouse)
-;; (global-set-key (kbd "<left-fringe> <mouse-1>") 'bm-toggle-mouse)
-;; (global-set-key (kbd "<C-f2>") 'bm-toggle)
-;; (global-set-key (kbd "<f2>")   'bm-next)
-;; (global-set-key (kbd "<S-f2>") 'bm-previous)
+;; Restore bookmarks when buffer is reverted.
+(add-hook 'after-revert-hook 'bm-buffer-restore)
 
 
-;; (add-hook 'after-init-hook 'global-company-mode)
+(global-set-key (kbd "<left-fringe> <mouse-5>") 'bm-next-mouse)
+(global-set-key (kbd "<left-fringe> <mouse-4>") 'bm-previous-mouse)
+(global-set-key (kbd "<left-fringe> <mouse-1>") 'bm-toggle-mouse)
+(global-set-key (kbd "<C-f2>") 'bm-toggle)
+(global-set-key (kbd "<f2>")   'bm-next)
+(global-set-key (kbd "<S-f2>") 'bm-previous)
+
+
+(add-hook 'after-init-hook 'global-company-mode)
 
 
 
@@ -708,7 +706,6 @@ If the new path's directories does not exist, create them."
 
 (add-hook 'coffee-mode-hook 'flymake-coffee-load)
 
-(add-hook 'enh-ruby-mode-hook 'flymake-mode)
 (add-hook 'enh-ruby-mode-hook
           (lambda () (modify-syntax-entry ?_ "w")))
 (add-hook 'scss-mode-hook
@@ -755,15 +752,3 @@ If the new path's directories does not exist, create them."
   (split-window-horizontally)
   (balance-windows))
 (global-set-key (kbd "<f7>") 'two-the-same)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "unspecified-bg" :foreground "unspecified-fg" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 160 :width normal :foundry "Anonymous Pro" :family "Anonymous Pro")))))
