@@ -213,6 +213,7 @@ If the new path's directories does not exist, create them."
 (setq desktop-save 'if-exists)
 (desktop-save-mode 1)
 
+(global-set-key (kbd "A-/") 'comment-dwim)
 
 
 ;; save a bunch of variables to the desktop file
@@ -239,7 +240,7 @@ If the new path's directories does not exist, create them."
                     :foreground "White" :background "Firebrick")
 
 (let ((prog-modes '( c-mode c++-mode java-mode ada-mode sh-mode tcl-mode
-                            cperl-mode php-mode python-mode ruby-mode enh-ruby-mode lisp-mode ))
+                            cperl-mode php-mode python-mode ruby-mode enh-ruby-mode lisp-mode go-mode ))
       (pattern "\\<\\(IMPORTANT\\|FIXME\\|TODO\\|@todo:\\|NOTE\\|note:\\|HACK\\|WTF\\):"))
   (mapcar(lambda (mode)
            (font-lock-add-keywords mode `((,pattern 1 'special-words prepend))))
@@ -358,17 +359,17 @@ If the new path's directories does not exist, create them."
 ;;
 
 ;;
-(add-hook 'php-mode-user-hook
-          '(lambda ()
-             (outline-minor-mode)
-             (setq outline-regexp " *\\(public funct\\|static funct\\|private funct\\|funct\\|class\\|#head\\)")
-             (hide-sublevels 1)))
-;;
-(add-hook 'python-mode-hook
-          '(lambda ()
-             (outline-minor-mode)
-             (setq outline-regexp " *\\(def \\|clas\\|#hea\\)")
-             (hide-sublevels 1)))
+;; (add-hook 'php-mode-user-hook
+;;           '(lambda ()
+;;              (outline-minor-mode)
+;;              (setq outline-regexp " *\\(public funct\\|static funct\\|private funct\\|funct\\|class\\|#head\\)")
+;;              (hide-sublevels 1)))
+;; ;;
+;; (add-hook 'python-mode-hook
+;;           '(lambda ()
+;;              (outline-minor-mode)
+;;              (setq outline-regexp " *\\(def \\|clas\\|#hea\\)")
+;;              (hide-sublevels 1)))
 
 (defun flymake-php-init ()
   "Use php to check the syntax of the current file."
@@ -737,7 +738,7 @@ If the new path's directories does not exist, create them."
 
 
 
-;;; I want a key to open the current buffer all over the screen.
+
 (defun all-over-the-screen ()
   (interactive)
   (delete-other-windows)
@@ -752,3 +753,24 @@ If the new path's directories does not exist, create them."
   (split-window-horizontally)
   (balance-windows))
 (global-set-key (kbd "<f7>") 'two-the-same)
+
+
+;; Go programming
+
+(eval-after-load "go-mode"
+  '(require 'flymake-go))
+(defun my-go-mode-hook ()
+  ; Use goimports instead of go-fmt
+  ;(setq gofmt-command "goimports")
+  (setq gofmt-command "gofmt")
+  ; Call Gofmt before saving
+  (add-hook 'before-save-hook 'gofmt-before-save)
+  ; Customize compile command to run go build
+  (if (not (string-match "go" compile-command))
+      (set (make-local-variable 'compile-command)
+           "go build -v && go test -v && go vet"))
+  ; Godef jump key binding
+  (local-set-key (kbd "M-.") 'godef-jump)
+  (local-set-key (kbd "M-*") 'pop-tag-mark)
+)
+(add-hook 'go-mode-hook 'my-go-mode-hook)
