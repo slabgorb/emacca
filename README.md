@@ -40,3 +40,4 @@ Packages
     package-install  bm                    ;; Visible bookmarks in buffer.
     package-install  async                 ;; Asynchronous processing in Emacs
     package-install  rainbow-delimiters    ;;    Highlight brackets according to their depth
+    package-install  go-mode 
