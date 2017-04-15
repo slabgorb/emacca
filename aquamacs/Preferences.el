@@ -11,12 +11,11 @@
 (require 'package)
 (package-initialize)
 
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+
 ;; Add my local configuration folder
 (setq load-path (cons "~/.emacs.d/lisp" load-path))
-
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "https://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.org/packages/")))
 
 (require 'nginx-mode)
 (require 'helm-config)
@@ -99,6 +98,12 @@
   (find-file "~/Projects/Babylon"))
 
 
+(defun gocode()
+  (interactive "*")
+  (find-file "~/Projects/gocode/src/github.com/RivingtonHoldings"))
+
+
+
 ;; return a backup file path of a give file path
 ;; with full directory mirroring from a root dir
 ;; non-existant dir will be created
@@ -172,6 +177,9 @@ If the new path's directories does not exist, create them."
 
 (defun device-baud-rate() (* 1 100000))
 
+
+
+
 (autoload 'markdown-mode "markdown-mode.el"
   "Major mode for editing Markdown files" t)
 (setq auto-mode-alist
@@ -181,9 +189,6 @@ If the new path's directories does not exist, create them."
 ;; ruby mode
 (setq auto-mode-alist (cons '("\\.rb$" . enh-ruby-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.rake$" . enh-ruby-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.thor$" . enh-ruby-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.Fastfile$" . enh-ruby-mode) auto-mode-alist))
-
 (setq interpreter-mode-alist (append '(("ruby" . enh-ruby-mode)) interpreter-mode-alist))
 
 
@@ -307,8 +312,9 @@ If the new path's directories does not exist, create them."
 (setq web-mode-enable-current-column-highlight t)
 (require 'web-mode)
 
-(add-to-list 'auto-mode-alist '("\\.ejs\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.ejs\\'" . web-mode))
+
 (add-to-list 'auto-mode-alist '("\\.htm\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
@@ -329,8 +335,18 @@ If the new path's directories does not exist, create them."
 (cua-mode t)
 (tabbar-mode t)
 
+
+(defun php-doc-paragraph-boundaries ()
+  (setq paragraph-separate "^[ \t]*\\(\\(/[/\\*]+\\)\\|\\(\\*+/\\)\\|\\(\\*?\\)\\|\\(\\*?[ \t]*@[[:alpha:]]+\\([ \t]+.*\\)?\\)\\)[ \t]*$")
+  (setq paragraph-start (symbol-value 'paragraph-separate)))
+
+(add-hook 'php-mode-user-hook 'php-doc-paragraph-boundaries)
+
+
 (global-set-key [M-mouse-1] 'mouse-set-point)
 (setq mac-option-modifier 'meta) ;- Sets the option key as Meta (this is default)
+
+
 
 (global-hl-line-mode 1)
 
@@ -405,6 +421,8 @@ If the new path's directories does not exist, create them."
 (defvar darkroom-enabled nil)
 
 (setq mode-line-format "%*%+ %b %l:%c %I %s")
+
+
 
 ; espresso mode indentation for js
 (autoload 'espresso-mode "espresso")
@@ -560,6 +578,9 @@ If the new path's directories does not exist, create them."
 (blink-cursor-mode 1)
 (require 'color-theme)
 
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "https://marmalade-repo.org/packages/")
+                         ("melpa" . "http://melpa.org/packages/")))
 
 
 (global-linum-mode t)
@@ -747,8 +768,8 @@ If the new path's directories does not exist, create them."
   '(require 'flymake-go))
 (defun my-go-mode-hook ()
   ; Use goimports instead of go-fmt
-  ;(setq gofmt-command "goimports")
-  (setq gofmt-command "gofmt")
+  (setq gofmt-command "goimports")
+  ;(setq gofmt-command "gofmt")
   ; Call Gofmt before saving
   (add-hook 'before-save-hook 'gofmt-before-save)
   ; Customize compile command to run go build
@@ -760,3 +781,10 @@ If the new path's directories does not exist, create them."
   (local-set-key (kbd "M-*") 'pop-tag-mark)
 )
 (add-hook 'go-mode-hook 'my-go-mode-hook)
+(add-hook 'go-mode-hook '(lambda ()
+  (local-set-key (kbd "C-c C-f") 'gofmt)))
+(add-hook 'go-mode-hook '(lambda ()
+  (local-set-key (kbd "C-c C-k") 'godoc)))
+
+
+(global-set-key (kbd "C-c C-u") 'string-inflection-all-cycle)
